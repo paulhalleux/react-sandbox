@@ -1,0 +1,9 @@
+.sidebar-subheading {
+  text-transform: none!important;
+  letter-spacing: initial!important;
+  font-size: 14px!important;
+}
+
+[data-action="collapse-root"] span {
+  margin-top: 5px!important;
+}

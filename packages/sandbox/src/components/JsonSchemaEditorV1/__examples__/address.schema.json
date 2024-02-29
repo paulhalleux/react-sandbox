@@ -1,0 +1,80 @@
+{
+  "$id": "//address.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Address",
+  "description": "An address format",
+  "type": "object",
+  "properties": {
+    "postOfficeBox": {
+      "title": "Post Office Box",
+      "description": "The post office box number",
+      "type": "string",
+      "default": "test"
+    },
+    "extendedAddress": {
+      "title": "Extended Address",
+      "description": "The extended address",
+      "type": "string"
+    },
+    "streetAddress": {
+      "title": "Street Address",
+      "description": "The street address",
+      "type": "string"
+    },
+    "locality": {
+      "title": "Locality",
+      "description": "The locality",
+      "type": "string"
+    },
+    "region": {
+      "title": "Region",
+      "description": "The region",
+      "type": "string"
+    },
+    "postalCode": {
+      "title": "Postal Code",
+      "description": "The postal code",
+      "type": "string"
+    },
+    "countryName": {
+      "title": "Country Name",
+      "description": "The country name",
+      "type": "string"
+    },
+    "enumTest": {
+      "title": "Enum Test",
+      "description": "An enum test",
+      "enum": ["postOfficeBox", "extendedAddress", "streetAddress", "locality", "region", "postalCode", "countryName"]
+    },
+    "arrayTest": {
+      "title": "Array Test",
+      "description": "An array test",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "title": "Test",
+        "description": "A test"
+      }
+    },
+    "objectArrayTest": {
+      "title": "Object Array Test",
+      "description": "An object array test",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "test": {
+            "type": "string",
+            "description": "A test",
+            "title": "Test"
+          }
+        }
+      }
+    }
+  },
+  "required": [ "locality", "region", "countryName" ],
+  "dependentRequired": {
+    "postOfficeBox": [ "streetAddress" ],
+    "extendedAddress": [ "streetAddress" ]
+  }
+}

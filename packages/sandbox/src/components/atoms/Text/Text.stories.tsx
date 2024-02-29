@@ -1,0 +1,50 @@
+import { Meta } from "@storybook/react";
+
+import { textStyles } from "./Text.styles.tsx";
+import { Text } from "./Text.tsx";
+
+const meta: Meta = {
+  title: "Atoms/Text",
+  tags: ["autodocs"],
+  component: Text,
+  argTypes: {
+    size: {
+      control: { type: "select" },
+      options: Object.keys(textStyles.variants.size),
+    },
+    weight: {
+      control: { type: "select" },
+      options: Object.keys(textStyles.variants.weight),
+    },
+    color: {
+      control: { type: "select" },
+      options: Object.keys(textStyles.variants.color),
+    },
+    underline: {
+      control: { type: "boolean" },
+    },
+    italic: {
+      control: { type: "boolean" },
+    },
+    strikethrough: {
+      control: { type: "boolean" },
+    },
+    as: {
+      control: { disable: true },
+    },
+  },
+};
+
+export default meta;
+
+export const Default = {
+  args: {
+    children: "Hello, world!",
+    size: "md",
+    weight: "normal",
+    color: "default",
+    underline: false,
+    italic: false,
+    strikethrough: false,
+  },
+};

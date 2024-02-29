@@ -1,0 +1,11 @@
+.docblock-argstable-body td {
+  background: transparent !important;
+}
+
+.docblock-argstable-body tr td:last-child {
+  border-right: 1px solid #00000016 !important;
+}
+
+.docblock-argstable {
+  border: 1px solid #00000016 !important;
+}
