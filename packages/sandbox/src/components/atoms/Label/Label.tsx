@@ -12,7 +12,7 @@ export function Label({ children, required, htmlFor }: LabelProps) {
     <Text size="xs" as="label" htmlFor={htmlFor}>
       {children}
       {required && (
-        <Text as="span" color="danger" weight="bold">
+        <Text as="span" color="danger">
           {" *"}
         </Text>
       )}

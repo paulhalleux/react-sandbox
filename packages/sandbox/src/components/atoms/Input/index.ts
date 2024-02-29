@@ -1,1 +1,1 @@
-export { Input } from "./Input.tsx";
+export { Input, type InputProps } from "./Input.tsx";

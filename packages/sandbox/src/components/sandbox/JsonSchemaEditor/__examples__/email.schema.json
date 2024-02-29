@@ -1,0 +1,9 @@
+{
+  "$id": "https://example.com/email.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Email address",
+  "description": "An email address",
+  "type": "string",
+  "format": "email",
+  "default": ""
+}

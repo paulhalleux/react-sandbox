@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Select } from "@/components/atoms";
+import { Select, Text } from "@/components/atoms";
+import { JsonSchema } from "@/components/sandbox/JsonSchemaEditor/types";
 
 import { Examples } from "./__examples__";
-import { JsonSchema } from "./JsonSchemaEditor.types.ts";
 import { JsonSchemaEditor } from "./";
 
 const meta: Meta = {
-  title: "Deprecated/JsonSchemaEditorV1",
+  title: "Components/JsonSchemaEditor",
   tags: ["autodocs"],
   component: JsonSchemaEditor,
   argTypes: {},
@@ -27,7 +27,7 @@ const ExampleMap = Examples.reduce(
 export const Default: StoryObj = {
   render: function Render() {
     const [schema, setSchema] = useState<JsonSchema>(Examples[0]);
-    const [value, setValue] = useState<any>({});
+    const [value, setValue] = useState<any>(Examples[0].default);
 
     return (
       <div>
@@ -36,12 +36,22 @@ export const Default: StoryObj = {
             <Select.Option
               key={example.title}
               value={example.title}
-              onClick={() => setSchema(example)}
+              onClick={() => {
+                setSchema(example);
+                setValue(example.default);
+              }}
             >
               {example.title}
             </Select.Option>
           ))}
         </Select>
+        <Text
+          size="sm"
+          className="mt-2"
+          title={JSON.stringify(schema, null, 4)}
+        >
+          Hover for schema
+        </Text>
         <hr className="my-3" />
         <JsonSchemaEditor
           value={value}
@@ -49,6 +59,8 @@ export const Default: StoryObj = {
           schema={schema}
           references={ExampleMap}
         />
+        <hr className="my-3" />
+        <pre>{JSON.stringify(value, null, 2)}</pre>
       </div>
     );
   },

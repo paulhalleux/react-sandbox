@@ -13,6 +13,11 @@ export const inputStyles = tv({
       sm: "h-6 px-2 text-xs",
       md: "h-8 px-3 text-xs",
     },
+    invalid: {
+      true:
+        "invalid:ring-red-500 invalid:border-red-500 invalid:placeholder-red-500 invalid:focus:ring-red-100 invalid:bg-red-50/50 " +
+        'data-[invalid="true"]:ring-red-500 data-[invalid="true"]:border-red-500 data-[invalid="true"]:placeholder-red-500 data-[invalid="true"]:focus:ring-red-100 data-[invalid="true"]:bg-red-50/50',
+    },
   },
   defaultVariants: {
     status: "default",

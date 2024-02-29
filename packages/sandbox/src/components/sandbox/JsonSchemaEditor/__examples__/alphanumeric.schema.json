@@ -1,0 +1,9 @@
+{
+  "$id": "https://example.com/string.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Alphanumeric string",
+  "description": "A string that contains only alphanumeric characters",
+  "type": "string",
+  "pattern": "^[a-zA-Z0-9]*$",
+  "default": ""
+}

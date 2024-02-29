@@ -9,7 +9,7 @@ type TextProps<ElementType extends React.ElementType> =
     React.ComponentPropsWithoutRef<ElementType> &
     TextVariant;
 
-export function Text<ElementType extends React.ElementType>({
+export function Text<ElementType extends React.ElementType = "p">({
   children,
   as,
   className,

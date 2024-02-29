@@ -1,0 +1,87 @@
+{
+  "$id": "https://example.com/string.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "String formats",
+  "description": "A schema with string formats",
+  "type": "object",
+  "properties": {
+    "date": {
+      "title": "Date",
+      "type": "string",
+      "format": "date",
+      "default": "1985-04-12"
+    },
+    "time": {
+      "title": "Time",
+      "type": "string",
+      "format": "time",
+      "default": "10:15:30"
+    },
+    "date-time": {
+      "title": "Date-time",
+      "type": "string",
+      "format": "date-time",
+      "default": "1985-04-12T10:15"
+    },
+    "email": {
+      "title": "Email",
+      "type": "string",
+      "format": "email",
+      "default": "root@localhost.com"
+    },
+    "hostname": {
+      "title": "Hostname",
+      "type": "string",
+      "format": "hostname",
+      "default": "localhost.com"
+    },
+    "ipv4": {
+      "title": "IPv4",
+      "type": "string",
+      "format": "ipv4",
+      "default": "1.1.1.1"
+    },
+    "ipv6": {
+      "title": "IPv6",
+      "type": "string",
+      "format": "ipv6",
+      "default": "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+    },
+    "uri": {
+      "title": "URI",
+      "type": "string",
+      "format": "uri",
+      "default": "https://example.com"
+    },
+    "uri-reference": {
+      "title": "URI reference",
+      "type": "string",
+      "format": "uri-reference",
+      "default": "/path/to/resource"
+    },
+    "uri-template": {
+      "title": "URI template",
+      "type": "string",
+      "format": "uri-template",
+      "default": "/path/to/resource/{id}"
+    },
+    "json-pointer": {
+      "title": "JSON pointer",
+      "type": "string",
+      "format": "json-pointer",
+      "default": "/path/to/property"
+    },
+    "relative-json-pointer": {
+      "title": "Relative JSON pointer",
+      "type": "string",
+      "format": "relative-json-pointer",
+      "default": "2/relative/path"
+    },
+    "regex": {
+      "title": "Regex",
+      "type": "string",
+      "format": "regex",
+      "default": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    }
+  }
+}

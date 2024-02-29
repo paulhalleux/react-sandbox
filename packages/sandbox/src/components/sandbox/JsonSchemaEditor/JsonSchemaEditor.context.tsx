@@ -1,20 +1,19 @@
 import { createContext, PropsWithChildren, useContext } from "react";
 import { get, set } from "lodash";
 
-import {
-  JsonSchema,
-  JsonSchemaType,
-} from "@/components/JsonSchemaEditor/JsonSchemaEditor.types.ts";
+import { RootPathKey } from "@/components/sandbox/JsonSchemaEditor/constants.ts";
+
+import { JsonSchema } from "./types";
 
 export type JsonSchemaEditorContextType = {
   value: any;
   onChange: (value: any) => void;
-  getPropertyValue: (propertyKey: string) => any;
+  getPropertyValue: (propertyKey: string, defaultValue?: any) => any;
   setPropertyValue: (propertyKey: string, value: any) => void;
   addArrayItem: (propertyKey: string, defaultValue?: any) => void;
   removeArrayItem: (propertyKey: string, index: number) => void;
-  references: Record<string, JsonSchemaType>;
-  requestReference: (id: string) => void;
+  references: Record<string, JsonSchema>;
+  requestReference: (id: string) => void | Promise<void>;
   schema?: JsonSchema;
 };
 
@@ -35,8 +34,8 @@ export const JsonSchemaEditorContext = createContext(defaultValue);
 type JsonSchemaEditorProviderProps = PropsWithChildren<{
   value: any;
   onChange: (value: any) => void;
-  references?: Record<string, JsonSchemaType>;
-  onReferenceRequest?: (ref: string) => void;
+  references?: Record<string, JsonSchema>;
+  onReferenceRequest?: (ref: string) => void | Promise<void>;
   schema?: JsonSchema;
 }>;
 
@@ -48,14 +47,18 @@ export function JsonSchemaEditorProvider({
   onReferenceRequest = () => {},
   schema,
 }: JsonSchemaEditorProviderProps) {
-  const getPropertyValue = (propertyKey: string) => {
-    return get(value, propertyKey.replace(/^\$\./, ""));
+  const getPropertyValue = (path: string, defaultValue?: any) => {
+    const val = path === RootPathKey ? value : get(value, getPath(path));
+    if (val === undefined) {
+      setPropertyValue(path, defaultValue);
+      return defaultValue;
+    }
+    return val;
   };
 
-  const setPropertyValue = (propertyKey: string, propertyValue: any) => {
-    onChange(
-      set({ ...value }, propertyKey.replace(/^\$\./, ""), propertyValue)
-    );
+  const setPropertyValue = (path: string, propertyValue: any) => {
+    if (path === RootPathKey) return onChange(propertyValue);
+    onChange(set({ ...value }, getPath(path), propertyValue));
   };
 
   const addArrayItem = (propertyKey: string, defaultValue: any = null) => {
@@ -98,4 +101,12 @@ export function JsonSchemaEditorProvider({
 
 export function useJsonSchemaEditor() {
   return useContext(JsonSchemaEditorContext);
+}
+
+/**
+ * Get the key for a path
+ * @param path
+ */
+function getPath(path: string) {
+  return path.replace(new RegExp(`^\\${RootPathKey}\\.?`), "");
 }
