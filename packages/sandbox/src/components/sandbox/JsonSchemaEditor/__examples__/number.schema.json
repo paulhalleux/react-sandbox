@@ -1,0 +1,12 @@
+{
+  "$id": "https://example.com/number.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Number",
+  "description": "A number schema",
+  "type": "number",
+  "minimum": 0,
+  "maximum": 100,
+  "exclusiveMinimum": true,
+  "exclusiveMaximum": true,
+  "default": 0
+}

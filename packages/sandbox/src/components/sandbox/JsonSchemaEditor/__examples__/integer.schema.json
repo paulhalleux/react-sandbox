@@ -1,0 +1,13 @@
+{
+  "$id": "https://example.com/integer.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Integer",
+  "description": "An integer schema",
+  "type": "number",
+  "minimum": -100,
+  "maximum": 100,
+  "multipleOf": 1,
+  "exclusiveMinimum": true,
+  "exclusiveMaximum": true,
+  "default": 0
+}

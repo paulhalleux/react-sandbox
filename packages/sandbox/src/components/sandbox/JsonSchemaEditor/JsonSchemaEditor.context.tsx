@@ -1,9 +1,8 @@
 import { createContext, PropsWithChildren, useContext } from "react";
 import { get, set } from "lodash";
 
-import { RootPathKey } from "@/components/sandbox/JsonSchemaEditor/constants.ts";
-
-import { JsonSchema } from "./types";
+import { RootPathKey } from "./constants";
+import { JsonSchema, ValidationResult } from "./types";
 
 export type JsonSchemaEditorContextType = {
   value: any;
@@ -15,6 +14,7 @@ export type JsonSchemaEditorContextType = {
   references: Record<string, JsonSchema>;
   requestReference: (id: string) => void | Promise<void>;
   schema?: JsonSchema;
+  validationResult?: ValidationResult;
 };
 
 const defaultValue: JsonSchemaEditorContextType = {
@@ -37,6 +37,7 @@ type JsonSchemaEditorProviderProps = PropsWithChildren<{
   references?: Record<string, JsonSchema>;
   onReferenceRequest?: (ref: string) => void | Promise<void>;
   schema?: JsonSchema;
+  validationResult?: ValidationResult;
 }>;
 
 export function JsonSchemaEditorProvider({
@@ -46,6 +47,7 @@ export function JsonSchemaEditorProvider({
   references = {},
   onReferenceRequest = () => {},
   schema,
+  validationResult,
 }: JsonSchemaEditorProviderProps) {
   const getPropertyValue = (path: string, defaultValue?: any) => {
     const val = path === RootPathKey ? value : get(value, getPath(path));
@@ -92,6 +94,7 @@ export function JsonSchemaEditorProvider({
         schema,
         addArrayItem,
         removeArrayItem,
+        validationResult,
       }}
     >
       {children}

@@ -22,18 +22,16 @@ export function Fieldset({
   return (
     <fieldset className={clsx("flex flex-col gap-4", containerClassName)}>
       {showHeader && (
-        <header className="flex flex-col gap-0">
+        <header className="flex flex-col gap-0.5">
           {legend && <Text as="legend">{legend}</Text>}
           {description && (
-            <Text size="sm" color="secondary">
+            <Text size="xs" color="secondary">
               {description}
             </Text>
           )}
         </header>
       )}
-      <div className={clsx("flex flex-col gap-4", className)}>
-        {props.children}
-      </div>
+      <div className={clsx("flex flex-col", className)}>{props.children}</div>
     </fieldset>
   );
 }

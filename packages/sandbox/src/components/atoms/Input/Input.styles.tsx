@@ -6,7 +6,8 @@ export const inputStyles = tv({
     "bg-white text-black border border-gray-300",
     "rounded-sm focus:outline-none font-medium",
     "focus:ring-2 focus:ring-offset-0 focus:ring-gray-100 w-full",
-    "placeholder placeholder-shown:font-normal"
+    "placeholder-shown:font-normal",
+    "invalid:ring-red-500 invalid:border-red-500 invalid:focus:ring-red-100 invalid:bg-red-50/50"
   ),
   variants: {
     size: {
@@ -14,9 +15,7 @@ export const inputStyles = tv({
       md: "h-8 px-3 text-xs",
     },
     invalid: {
-      true:
-        "invalid:ring-red-500 invalid:border-red-500 invalid:placeholder-red-500 invalid:focus:ring-red-100 invalid:bg-red-50/50 " +
-        'data-[invalid="true"]:ring-red-500 data-[invalid="true"]:border-red-500 data-[invalid="true"]:placeholder-red-500 data-[invalid="true"]:focus:ring-red-100 data-[invalid="true"]:bg-red-50/50',
+      true: 'data-[invalid="true"]:ring-red-500 data-[invalid="true"]:border-red-500 data-[invalid="true"]:focus:ring-red-100 data-[invalid="true"]:bg-red-50/50',
     },
   },
   defaultVariants: {

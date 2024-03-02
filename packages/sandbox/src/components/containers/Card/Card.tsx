@@ -8,7 +8,7 @@ type CardProps<ElementType extends React.ElementType> = PropsWithChildren<{
   ComponentPropsWithoutRef<ElementType> &
   CardVariant;
 
-export function Card<ElementType extends React.ElementType>({
+export function Card<ElementType extends React.ElementType = "div">({
   as,
   children,
   type,

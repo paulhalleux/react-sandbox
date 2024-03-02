@@ -5,7 +5,7 @@ import { JsonSchemaType } from "./types";
  * @see https://json-schema.org/
  */
 export type JsonSchema =
-  | ({
+  | {
       $id?: string;
       $schema?: string;
       $comment?: string;
@@ -14,5 +14,4 @@ export type JsonSchema =
       $anchor?: string;
       $ref?: string;
       $dynamicRef?: string;
-    } & JsonSchemaType)
-  | true;
+    } & JsonSchemaType;

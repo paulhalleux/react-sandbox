@@ -1,7 +1,13 @@
 import { ComponentType } from "react";
 import isObject from "lodash/isObject";
 
-import { ObjectRenderer, StringRenderer } from "./Renderers";
+import {
+  IntegerRenderer,
+  NullRenderer,
+  NumberRenderer,
+  ObjectRenderer,
+  StringRenderer,
+} from "./renderers";
 import { BaseJsonSchemaType, JsonSchema, JsonSchemaType } from "./types";
 
 /**
@@ -29,6 +35,9 @@ type SchemaRendererProps = {
 const SimpleTypesMap: Record<string, ComponentType<RendererProps<any>>> = {
   string: StringRenderer,
   object: ObjectRenderer,
+  number: NumberRenderer,
+  integer: IntegerRenderer,
+  null: NullRenderer,
 };
 
 /**

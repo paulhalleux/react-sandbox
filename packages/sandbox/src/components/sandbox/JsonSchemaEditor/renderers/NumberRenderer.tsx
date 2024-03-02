@@ -1,37 +1,42 @@
 import { Field } from "@/components/molecules";
 
-import { useStringFormatProps } from "../hooks/useStringFormatProps";
 import { useJsonSchemaEditor } from "../JsonSchemaEditor.context";
 import { RendererProps } from "../SchemaRenderer";
-import { JsonSchemaString } from "../types";
+import { JsonSchemaNumeric } from "../types";
 
 /**
- * Renderer for string schema type
+ * Renderer for number schema type
  */
-export function StringRenderer({
+export function NumberRenderer({
   definition,
   path,
   required,
-}: RendererProps<JsonSchemaString>) {
+}: RendererProps<JsonSchemaNumeric>) {
   const { getPropertyValue, setPropertyValue } = useJsonSchemaEditor();
-  const { schema, inputProps } = useStringFormatProps(definition);
 
   const value = getPropertyValue(path, definition.default);
 
   return (
     <Field.Input
+      type="number"
       id={path}
       label={definition.title}
       placeholder={definition.description}
       name={path}
-      value={value ?? definition.default ?? ""}
+      step={definition.multipleOf ?? 0.01}
+      value={value ?? definition.default}
       onChange={(value) => setPropertyValue(path, value)}
       required={required}
-      pattern={definition.pattern}
-      minLength={definition.minLength}
-      maxLength={definition.maxLength}
-      invalid={!schema.safeParse(value).success}
-      {...inputProps}
+      min={
+        definition.exclusiveMinimum && definition.minimum
+          ? definition.minimum + 1
+          : definition.minimum
+      }
+      max={
+        definition.exclusiveMaximum && definition.maximum
+          ? definition.maximum - 1
+          : definition.maximum
+      }
     />
   );
 }

@@ -1,2 +1,3 @@
 export * from "./types";
-export * from "./JsonSchema";
+export * from "./validation.ts";
+export * from "./JsonSchema.ts";
