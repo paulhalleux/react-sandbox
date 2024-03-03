@@ -1,0 +1,15 @@
+{
+  "$id": "https://example.com/array.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Array (simple)",
+  "description": "An array of integers",
+  "type": "array",
+  "items": {
+    "type": "integer",
+    "minimum": 0
+  },
+  "minItems": 2,
+  "maxItems": 10,
+  "uniqueItems": true,
+  "default": [null, null]
+}

@@ -15,7 +15,7 @@ export function StringRenderer({
   const { getPropertyValue, setPropertyValue, validationResult } =
     useJsonSchemaEditor();
 
-  const value = getPropertyValue(path, definition.default);
+  const value = getPropertyValue(path);
 
   return (
     <Field.Input
@@ -29,7 +29,10 @@ export function StringRenderer({
       pattern={definition.pattern}
       minLength={definition.minLength}
       maxLength={definition.maxLength}
-      invalid={validationResult?.errors[path] !== undefined}
+      help={definition.$comment}
+      error={validationResult?.errors[path]?.message}
+      example={definition.examples?.[0]}
+      displayOptional
     />
   );
 }

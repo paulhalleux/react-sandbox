@@ -2,6 +2,7 @@
   "name": "@paulhalleux/sandbox",
   "version": "0.0.0",
   "type": "module",
+  "license": "MIT",
   "files": [
     "dist"
   ],
@@ -21,10 +22,15 @@
     "build:storybook": "storybook build",
     "build:tailwind": "tailwindcss build src/styles/index.css -o dist/style.css",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "publish:storybook": "yarn build && firebase deploy --only hosting:phal-sandbox"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.26.9",
+    "@uidotdev/usehooks": "^2.4.1",
+    "framer-motion": "^11.0.8",
     "lodash": "^4.17.21",
+    "lucide-react": "^0.344.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zod": "^3.22.4"
@@ -54,6 +60,7 @@
     "tailwind-variants": "^0.2.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.7.3"
   }
 }

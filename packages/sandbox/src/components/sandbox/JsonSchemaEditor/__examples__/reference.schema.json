@@ -1,0 +1,12 @@
+{
+  "$id": "https://example.com/reference.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reference",
+  "description": "A schema with a $ref reference",
+  "type": "object",
+  "properties": {
+    "foo": {
+      "$ref": "https://example.com/string.schema.json"
+    }
+  }
+}

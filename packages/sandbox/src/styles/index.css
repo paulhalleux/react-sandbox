@@ -3,3 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .placeholder-error::placeholder {
+    color: theme('colors.red.500');
+  }
+}

@@ -9,12 +9,23 @@ export function Button({
   size,
   status,
   className,
+  icon,
   ...rest
 }: ButtonProps) {
-  const classes = buttonStyles({ size, status, className });
+  const classes = buttonStyles({ size, status, className, icon });
   return (
     <button className={classes} {...rest}>
       {children}
     </button>
   );
 }
+
+function IconButton({ children, ...props }: Omit<ButtonProps, "icon">) {
+  return (
+    <Button {...props} icon>
+      {children}
+    </Button>
+  );
+}
+
+Button.Icon = IconButton;

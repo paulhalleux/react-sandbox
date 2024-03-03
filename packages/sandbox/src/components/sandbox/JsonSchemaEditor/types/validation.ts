@@ -3,9 +3,11 @@ import { JsonSchema } from ".";
 /**
  * A JSON schema validator builder.
  */
-export type JsonSchemaValidatorBuilder = (
-  schema: JsonSchema
-) => JsonSchemaValidator;
+export type JsonSchemaValidatorBuilder = (args: {
+  schema: JsonSchema;
+  refs?: Record<string, JsonSchema>;
+  requestReference?: (id: string) => JsonSchema | Promise<JsonSchema>;
+}) => JsonSchemaValidator;
 
 /**
  * A JSON schema validator.

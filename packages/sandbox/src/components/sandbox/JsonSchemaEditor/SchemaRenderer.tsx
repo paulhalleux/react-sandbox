@@ -2,10 +2,14 @@ import { ComponentType } from "react";
 import isObject from "lodash/isObject";
 
 import {
+  ArrayRenderer,
+  ConstRenderer,
+  EnumRenderer,
   IntegerRenderer,
   NullRenderer,
   NumberRenderer,
   ObjectRenderer,
+  ReferenceRenderer,
   StringRenderer,
 } from "./renderers";
 import { BaseJsonSchemaType, JsonSchema, JsonSchemaType } from "./types";
@@ -38,6 +42,31 @@ const SimpleTypesMap: Record<string, ComponentType<RendererProps<any>>> = {
   number: NumberRenderer,
   integer: IntegerRenderer,
   null: NullRenderer,
+  array: ArrayRenderer,
+};
+
+/**
+ * Map of specific JSON schema types to their renderer components.
+ */
+const SpecificTypesMap: Record<
+  string,
+  {
+    match: (schema: JsonSchema) => boolean;
+    component: ComponentType<RendererProps<any>>;
+  }
+> = {
+  enum: {
+    match: (schema: JsonSchema) => "enum" in schema,
+    component: EnumRenderer,
+  },
+  const: {
+    match: (schema: JsonSchema) => "const" in schema,
+    component: ConstRenderer,
+  },
+  reference: {
+    match: (schema: JsonSchema) => "$ref" in schema,
+    component: ReferenceRenderer,
+  },
 };
 
 /**
@@ -55,6 +84,20 @@ export function SchemaRenderer({
 
   if (Renderer) {
     return <Renderer definition={schema} path={path} required={required} />;
+  }
+
+  const specificRenderer = Object.values(SpecificTypesMap).find(({ match }) =>
+    match(schema)
+  );
+
+  if (specificRenderer) {
+    return (
+      <specificRenderer.component
+        definition={schema}
+        path={path}
+        required={required}
+      />
+    );
   }
 
   return null;

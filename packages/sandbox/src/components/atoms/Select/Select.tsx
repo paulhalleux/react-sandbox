@@ -2,7 +2,7 @@ import React from "react";
 
 import { selectStyles, SelectVariant } from "./Select.styles.tsx";
 
-type SelectProps = React.PropsWithChildren &
+export type SelectProps = React.PropsWithChildren &
   React.ComponentPropsWithoutRef<"select"> &
   SelectVariant;
 

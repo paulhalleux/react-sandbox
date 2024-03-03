@@ -4,6 +4,7 @@ export const textStyles = tv({
   base: "text-base font-medium !leading-tight",
   variants: {
     size: {
+      xxs: "text-[10px]",
       xs: "text-xs",
       sm: "text-sm",
       md: "text-md",

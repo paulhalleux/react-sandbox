@@ -1,7 +1,12 @@
 import {
+  JsonSchemaArray,
+  JsonSchemaBoolean,
+  JsonSchemaConst,
+  JsonSchemaEnum,
   JsonSchemaNull,
   JsonSchemaNumeric,
   JsonSchemaObject,
+  JsonSchemaReference,
   JsonSchemaString,
 } from ".";
 
@@ -10,7 +15,17 @@ import {
  * @see https://json-schema.org/understanding-json-schema/reference/type
  */
 export type JsonSchemaType = BaseJsonSchemaType &
-  (JsonSchemaString | JsonSchemaObject | JsonSchemaNumeric | JsonSchemaNull);
+  (
+    | JsonSchemaString
+    | JsonSchemaObject
+    | JsonSchemaNumeric
+    | JsonSchemaNull
+    | JsonSchemaArray
+    | JsonSchemaBoolean
+    | JsonSchemaEnum
+    | JsonSchemaConst
+    | JsonSchemaReference
+  );
 
 /**
  * Base JSON schema value type
@@ -21,4 +36,6 @@ export type BaseJsonSchemaType = {
   title?: string;
   description?: string;
   default?: any;
+  deprecated?: boolean;
+  examples?: any[];
 };

@@ -3,3 +3,8 @@ export * from "./JsonSchemaNumeric.ts";
 export * from "./JsonSchemaNull.ts";
 export * from "./JsonSchemaObject.ts";
 export * from "./JsonSchemaType.ts";
+export * from "./JsonSchemaArray.ts";
+export * from "./JsonSchemaBoolean.ts";
+export * from "./JsonSchemaEnum.ts";
+export * from "./JsonSchemaConst.ts";
+export * from "./JsonSchemaReference.ts";

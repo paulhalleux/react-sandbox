@@ -31,7 +31,9 @@ export function Fieldset({
           )}
         </header>
       )}
-      <div className={clsx("flex flex-col", className)}>{props.children}</div>
+      <div className={clsx("flex flex-col w-full items-start", className)}>
+        {props.children}
+      </div>
     </fieldset>
   );
 }

@@ -6,7 +6,7 @@ type TextProps<ElementType extends React.ElementType> =
   React.PropsWithChildren<{
     as?: ElementType;
   }> &
-    React.ComponentPropsWithoutRef<ElementType> &
+    Omit<React.ComponentPropsWithoutRef<ElementType>, keyof TextVariant> &
     TextVariant;
 
 export function Text<ElementType extends React.ElementType = "p">({
@@ -39,3 +39,22 @@ export function Text<ElementType extends React.ElementType = "p">({
     </Component>
   );
 }
+
+type TextLinesProps = {
+  text: string;
+};
+
+function TextLines({ text }: TextLinesProps) {
+  return (
+    <span>
+      {text.split("\n").map((line, index, self) => (
+        <React.Fragment key={`${index}_${line}`}>
+          {line}
+          {index < self.length - 1 && <br />}
+        </React.Fragment>
+      ))}
+    </span>
+  );
+}
+
+Text.Lines = TextLines;

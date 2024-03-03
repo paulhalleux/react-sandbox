@@ -7,9 +7,8 @@ import { getErrorMessage, ZodValidatorModule } from ".";
 /**
  * A Zod schema validator for strings json schema.
  */
-export const StringValidator: ZodValidatorModule<JsonSchemaString> = (
-  schema
-) => {
+export const StringValidator: ZodValidatorModule<JsonSchemaString> = (args) => {
+  const { schema } = args;
   let validator = z.string({
     errorMap: (error) => getErrorMessage(schema, error.message ?? ""),
   });

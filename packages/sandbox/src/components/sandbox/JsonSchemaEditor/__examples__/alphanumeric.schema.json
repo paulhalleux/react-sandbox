@@ -1,5 +1,5 @@
 {
-  "$id": "https://example.com/string.schema.json",
+  "$id": "https://example.com/alphanumeric.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Alphanumeric string",
   "description": "A string that contains only alphanumeric characters",

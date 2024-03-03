@@ -1,7 +1,7 @@
 {
-  "$id": "https://example.com/string.schema.json",
+  "$id": "https://example.com/string-formats.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "String formats",
+  "title": "String formats (Simple object)",
   "description": "A schema with string formats",
   "type": "object",
   "properties": {

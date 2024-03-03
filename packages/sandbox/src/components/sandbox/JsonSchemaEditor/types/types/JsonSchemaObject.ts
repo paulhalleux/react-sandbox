@@ -1,7 +1,7 @@
-import { JsonSchema } from "@/components/sandbox/JsonSchemaEditor/types";
+import { JsonSchema } from "..";
 
 /**
- * JSON schema object type
+ * JSON schema for object type
  */
 export type JsonSchemaObject = {
   type: "object";

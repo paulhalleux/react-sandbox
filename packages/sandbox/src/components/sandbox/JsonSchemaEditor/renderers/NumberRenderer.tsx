@@ -12,9 +12,10 @@ export function NumberRenderer({
   path,
   required,
 }: RendererProps<JsonSchemaNumeric>) {
-  const { getPropertyValue, setPropertyValue } = useJsonSchemaEditor();
+  const { getPropertyValue, setPropertyValue, validationResult } =
+    useJsonSchemaEditor();
 
-  const value = getPropertyValue(path, definition.default);
+  const value = getPropertyValue(path);
 
   return (
     <Field.Input
@@ -25,7 +26,7 @@ export function NumberRenderer({
       name={path}
       step={definition.multipleOf ?? 0.01}
       value={value ?? definition.default}
-      onChange={(value) => setPropertyValue(path, value)}
+      onChange={(value) => setPropertyValue(path, Number(value))}
       required={required}
       min={
         definition.exclusiveMinimum && definition.minimum
@@ -37,6 +38,10 @@ export function NumberRenderer({
           ? definition.maximum - 1
           : definition.maximum
       }
+      help={definition.$comment}
+      error={validationResult?.errors[path]?.message}
+      example={definition.examples?.[0]}
+      displayOptional
     />
   );
 }

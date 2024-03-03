@@ -48,3 +48,11 @@ export const Default = {
     strikethrough: false,
   },
 };
+
+export const Lines = {
+  render: () => (
+    <Text.Lines
+      text={`This component splits the text into lines\nand renders each line as a separate text element.`}
+    />
+  ),
+};

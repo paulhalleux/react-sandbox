@@ -1,11 +1,10 @@
-import { Fieldset } from "@/components/containers";
-import { Card } from "@/components/containers/Card";
+import { Card, Fieldset } from "@/components/containers";
 
 import { RendererProps, SchemaRenderer } from "../SchemaRenderer";
 import { JsonSchemaObject } from "../types";
 
 /**
- * Renderer for string schema type
+ * Renderer for object schema type
  */
 export function ObjectRenderer({
   definition,
@@ -17,7 +16,11 @@ export function ObjectRenderer({
 
   return (
     <Card className="p-4">
-      <Fieldset legend={definition.title} description={definition.description}>
+      <Fieldset
+        legend={definition.title}
+        description={definition.description}
+        className="gap-2.5"
+      >
         {Object.entries(definition.properties).map(([key, schema]) => (
           <SchemaRenderer
             key={key}

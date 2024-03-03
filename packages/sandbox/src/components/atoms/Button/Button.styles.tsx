@@ -6,7 +6,7 @@ export const buttonStyles = tv({
     "flex items-center",
     "rounded-sm focus:outline-none font-medium",
     "focus:ring-2 focus:ring-offset-0 focus:ring-gray-100",
-    "active:bg-gray-50"
+    "active:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
   ),
   variants: {
     status: {
@@ -15,6 +15,9 @@ export const buttonStyles = tv({
     size: {
       sm: "h-6 px-2 text-xs",
       md: "h-8 px-3 text-xs",
+    },
+    icon: {
+      true: "aspect-square p-0 flex items-center justify-center",
     },
   },
   defaultVariants: {

@@ -12,9 +12,10 @@ export function IntegerRenderer({
   path,
   required,
 }: RendererProps<JsonSchemaNumeric>) {
-  const { getPropertyValue, setPropertyValue } = useJsonSchemaEditor();
+  const { getPropertyValue, setPropertyValue, validationResult } =
+    useJsonSchemaEditor();
 
-  const value = getPropertyValue(path, definition.default);
+  const value = getPropertyValue(path);
 
   return (
     <Field.Input
@@ -25,7 +26,7 @@ export function IntegerRenderer({
       name={path}
       step={Math.round(definition.multipleOf ?? 1.0)}
       value={value ?? definition.default}
-      onChange={(value) => setPropertyValue(path, value)}
+      onChange={(value) => setPropertyValue(path, Number(value))}
       required={required}
       min={
         definition.exclusiveMinimum && definition.minimum
@@ -37,9 +38,10 @@ export function IntegerRenderer({
           ? definition.maximum - 1
           : definition.maximum
       }
-      invalid={
-        value !== undefined && !Number.isInteger(value) && value % 1 !== 0
-      }
+      help={definition.$comment}
+      error={validationResult?.errors[path]?.message}
+      example={definition.examples?.[0]}
+      displayOptional
     />
   );
 }

@@ -10,18 +10,31 @@ import {
 } from "../../types";
 import { JsonSchemaValidatorBuilder } from "../../types/validation";
 
+import { ArrayValidator } from "./ArrayValidator";
+import { NumericValidator } from "./NumericValidator";
 import { ObjectValidator } from "./ObjectValidator";
 import { StringValidator } from "./StringValidator";
 
+export type ZodValidatorModuleArgs<T extends JsonSchemaType> = {
+  schema: T & BaseJsonSchemaType;
+  required?: boolean;
+  refs?: Record<string, JsonSchema>;
+  requestReference?: (id: string) => JsonSchema | Promise<JsonSchema>;
+};
+
 export type ZodValidatorModule<T extends JsonSchemaType> = (
-  schema: T & BaseJsonSchemaType
+  args: ZodValidatorModuleArgs<T>
 ) => z.Schema;
 
 /**
  * A Zod schema validator builder.
  */
-export const ZodValidator: JsonSchemaValidatorBuilder = (schema) => {
-  const validator = getSchemaValidator(schema);
+export const ZodValidator: JsonSchemaValidatorBuilder = ({
+  schema,
+  refs,
+  requestReference,
+}) => {
+  const validator = getSchemaValidator({ schema, refs, requestReference });
 
   return (value) => {
     const result = validator.safeParse(value);
@@ -54,17 +67,20 @@ export const ZodValidator: JsonSchemaValidatorBuilder = (schema) => {
 const SimpleTypesMap: Record<string, ZodValidatorModule<any>> = {
   string: StringValidator,
   object: ObjectValidator,
+  number: NumericValidator,
+  integer: NumericValidator,
+  array: ArrayValidator,
 };
 
 /**
  * Get a schema validator for a JSON schema.
- * @param schema - JSON schema
+ * @param args - Schema validator module arguments
  * @returns Schema validator
  */
-export function getSchemaValidator(schema: JsonSchema) {
-  const type = schema.type;
+export function getSchemaValidator(args: ZodValidatorModuleArgs<any>) {
+  const type = args.schema.type;
   const validator = SimpleTypesMap[type];
-  return validator ? validator(schema) : z.any();
+  return validator ? validator(args) : z.any();
 }
 
 /**

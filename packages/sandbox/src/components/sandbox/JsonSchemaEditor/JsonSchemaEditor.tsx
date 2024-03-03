@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { Button } from "@/components/atoms";
 
 import {
@@ -16,9 +14,10 @@ type JsonSchemaEditorProps = {
   onChange: (value: any) => void;
   schema?: JsonSchema;
   references?: Record<string, JsonSchema>;
-  onReferenceRequest?: (ref: string) => void | Promise<void>;
+  onReferenceRequest?: (ref: string) => JsonSchema | Promise<JsonSchema>;
   onSubmit?: (validationResult: ValidationResult | undefined) => void;
   validator?: JsonSchemaValidatorBuilder;
+  validationResult?: ValidationResult;
 };
 
 export function JsonSchemaEditor({
@@ -29,20 +28,17 @@ export function JsonSchemaEditor({
   onSubmit,
   onReferenceRequest,
   validator,
+  validationResult,
 }: JsonSchemaEditorProps) {
-  const [validationResult, setValidationResult] = useState<ValidationResult>();
-
   if (!schema) return null;
 
   const onFormSubmit = () => {
     if (!validator) {
       onSubmit?.(undefined);
-      setValidationResult(undefined);
       return;
     }
 
-    const result = validator(schema)(value);
-    setValidationResult(result);
+    const result = validator({ schema })(value);
     onSubmit?.(result);
   };
 

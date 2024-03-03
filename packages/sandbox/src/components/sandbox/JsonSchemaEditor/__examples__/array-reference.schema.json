@@ -1,0 +1,11 @@
+{
+  "$id": "https://example.com/array-reference.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Array (reference)",
+  "description": "An array of references to a schema.",
+  "type": "array",
+  "items": {
+    "$ref": "https://example.com/reference.schema.json"
+  },
+  "default": []
+}

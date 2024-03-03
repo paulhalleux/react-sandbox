@@ -1,5 +1,5 @@
 import { createContext, PropsWithChildren, useContext } from "react";
-import { get, set } from "lodash";
+import { cloneDeep, get, set } from "lodash";
 
 import { RootPathKey } from "./constants";
 import { JsonSchema, ValidationResult } from "./types";
@@ -7,12 +7,12 @@ import { JsonSchema, ValidationResult } from "./types";
 export type JsonSchemaEditorContextType = {
   value: any;
   onChange: (value: any) => void;
-  getPropertyValue: (propertyKey: string, defaultValue?: any) => any;
+  getPropertyValue: (propertyKey: string) => any;
   setPropertyValue: (propertyKey: string, value: any) => void;
   addArrayItem: (propertyKey: string, defaultValue?: any) => void;
   removeArrayItem: (propertyKey: string, index: number) => void;
   references: Record<string, JsonSchema>;
-  requestReference: (id: string) => void | Promise<void>;
+  requestReference: (id: string) => JsonSchema | Promise<JsonSchema>;
   schema?: JsonSchema;
   validationResult?: ValidationResult;
 };
@@ -25,7 +25,7 @@ const defaultValue: JsonSchemaEditorContextType = {
   addArrayItem: () => {},
   removeArrayItem: () => {},
   references: {},
-  requestReference: () => {},
+  requestReference: () => Promise.resolve({} as JsonSchema),
   schema: undefined,
 };
 
@@ -35,7 +35,7 @@ type JsonSchemaEditorProviderProps = PropsWithChildren<{
   value: any;
   onChange: (value: any) => void;
   references?: Record<string, JsonSchema>;
-  onReferenceRequest?: (ref: string) => void | Promise<void>;
+  onReferenceRequest?: (ref: string) => JsonSchema | Promise<JsonSchema>;
   schema?: JsonSchema;
   validationResult?: ValidationResult;
 }>;
@@ -45,22 +45,17 @@ export function JsonSchemaEditorProvider({
   onChange,
   value,
   references = {},
-  onReferenceRequest = () => {},
+  onReferenceRequest = () => Promise.resolve({} as JsonSchema),
   schema,
   validationResult,
 }: JsonSchemaEditorProviderProps) {
-  const getPropertyValue = (path: string, defaultValue?: any) => {
-    const val = path === RootPathKey ? value : get(value, getPath(path));
-    if (val === undefined) {
-      setPropertyValue(path, defaultValue);
-      return defaultValue;
-    }
-    return val;
+  const getPropertyValue = (path: string) => {
+    return path === RootPathKey ? value : get(value, getPath(path));
   };
 
   const setPropertyValue = (path: string, propertyValue: any) => {
     if (path === RootPathKey) return onChange(propertyValue);
-    onChange(set({ ...value }, getPath(path), propertyValue));
+    onChange(set(cloneDeep(value), getPath(path), propertyValue));
   };
 
   const addArrayItem = (propertyKey: string, defaultValue: any = null) => {

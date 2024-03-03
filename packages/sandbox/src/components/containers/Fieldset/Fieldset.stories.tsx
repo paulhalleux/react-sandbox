@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 
-import { Input } from "@/components/atoms";
+import { Field } from "@/components/molecules";
 
 import { Fieldset } from "./Fieldset.tsx";
 
@@ -23,11 +23,20 @@ export const Default = {
   args: {
     children: (
       <>
-        <Input />
-        <Input />
+        <Field.Input
+          label="Firstname"
+          help="Enter you firstname"
+          example="Eg. John"
+        />
+        <Field.Input
+          label="Lastname"
+          help="Enter you lastname"
+          example="Eg. Doe"
+        />
       </>
     ),
     legend: "Legend",
     description: "Description",
+    className: "gap-2.5",
   },
 };

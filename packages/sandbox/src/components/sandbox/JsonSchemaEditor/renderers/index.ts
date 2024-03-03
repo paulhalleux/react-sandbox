@@ -3,3 +3,7 @@ export { ObjectRenderer } from "./ObjectRenderer.tsx";
 export { NumberRenderer } from "./NumberRenderer.tsx";
 export { IntegerRenderer } from "./IntegerRenderer.tsx";
 export { NullRenderer } from "./NullRenderer.tsx";
+export { ArrayRenderer } from "./ArrayRenderer.tsx";
+export { EnumRenderer } from "./EnumRenderer.tsx";
+export { ConstRenderer } from "./ConstRenderer.tsx";
+export { ReferenceRenderer } from "./ReferenceRenderer.tsx";

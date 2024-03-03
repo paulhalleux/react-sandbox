@@ -1,24 +1,37 @@
 import React from "react";
+import { omit } from "lodash";
 
-import { Input, InputProps, Label } from "@/components/atoms";
+import {
+  Input,
+  type InputProps,
+  Label,
+  Select,
+  type SelectProps,
+  Text,
+} from "@/components/atoms";
 
 /**
  * Field component props
  */
-export type FieldComponentProps<ValueType> = {
-  value?: ValueType;
-  onChange?: (value: ValueType) => void;
-} & FieldProps;
+export type FieldComponentProps<ValueType, AdditionalProps> = Omit<
+  FieldProps<ValueType> & AdditionalProps,
+  InvalidPropsKeys
+>;
 
 /**
  * Field wrapper related props
  */
-type FieldProps = React.PropsWithChildren<{
+type FieldProps<ValueType> = React.PropsWithChildren<{
   label?: string;
   required?: boolean;
   id?: string;
   name?: string;
-  invalid?: boolean;
+  error?: string;
+  help?: string;
+  example?: string;
+  displayOptional?: boolean;
+  value?: ValueType;
+  onChange?: (value: ValueType) => void;
 }>;
 
 export const Field = {
@@ -29,8 +42,15 @@ export const Field = {
         {...props}
         value={value ?? ""}
         onChange={(e) => onChange?.(e.target.value)}
-        invalid={props.invalid}
+        invalid={props.error !== undefined}
       />
+    );
+  }),
+  Select: asField<string | number, SelectProps>(({ onChange, ...props }) => {
+    return (
+      <Select onChange={(e) => onChange?.(e.target.value)} {...props}>
+        {props.children}
+      </Select>
     );
   }),
 };
@@ -42,21 +62,48 @@ export const Field = {
  */
 export function asField<ValueType, AdditionalProps = {}>(
   Component: React.ComponentType<
-    FieldComponentProps<ValueType> & Omit<AdditionalProps, "onChange" | "value">
+    FieldComponentProps<ValueType, Omit<AdditionalProps, "onChange" | "value">>
   >
 ) {
   return (
-    props: FieldComponentProps<ValueType> & FieldProps & AdditionalProps
-  ) => {
-    return (
-      <div data-name={props.name} className="flex flex-col gap-1.5 mb-2.5">
-        {props.label && (
-          <Label required={props.required} htmlFor={props.id}>
-            {props.label}
-          </Label>
-        )}
-        <Component {...props} />
-      </div>
-    );
-  };
+    props: FieldProps<ValueType> & Omit<AdditionalProps, "value" | "onChange">
+  ) => (
+    <div data-name={props.name} className="flex flex-col gap-1.5 w-full">
+      {props.label && (
+        <Label
+          required={props.required}
+          htmlFor={props.id}
+          help={props.help ? <Text.Lines text={props.help} /> : undefined}
+          requiredDisplay={props.displayOptional ? "optional" : "required"}
+        >
+          <span className="flex items-center gap-1">{props.label}</span>
+        </Label>
+      )}
+      <Component {...withoutInvalidProps(props)} />
+      {props.error && (
+        <Text size="xxs" color="danger">
+          {props.error}
+        </Text>
+      )}
+      {props.example && !props.error && (
+        <Text size="xxs" color="secondary">
+          {props.example}
+        </Text>
+      )}
+    </div>
+  );
+}
+
+const InvalidProps = ["help", "example", "displayOptional"] as const;
+type InvalidPropsKeys = (typeof InvalidProps)[number];
+
+/**
+ * Omit invalid props
+ * @param props The props to clean
+ * @returns The cleaned props
+ */
+function withoutInvalidProps<Props extends Record<string, any>>(
+  props: Props
+): Omit<typeof props, InvalidPropsKeys> {
+  return omit(props, InvalidProps);
 }

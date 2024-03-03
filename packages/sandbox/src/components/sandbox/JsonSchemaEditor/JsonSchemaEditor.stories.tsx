@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Select } from "@/components/atoms";
+import { Select, Text } from "@/components/atoms";
 import { Card } from "@/components/containers";
 
 import { Examples } from "./__examples__";
@@ -37,14 +37,16 @@ export const Default: StoryObj = {
 
     return (
       <div>
-        <Select>
+        <Select title={JSON.stringify(schema, null, 4)}>
           {Examples.map((example) => (
             <Select.Option
+              title={JSON.stringify(example, null, 4)}
               key={example.title}
               value={example.title}
               onClick={() => {
                 setSchema(example);
                 setValue(example.default);
+                setValidation(undefined);
               }}
             >
               {example.title}
@@ -52,25 +54,32 @@ export const Default: StoryObj = {
           ))}
         </Select>
         <hr className="my-3" />
-        <div className="grid grid-cols-6 gap-4">
-          <div className="col-span-4">
-            <JsonSchemaEditor
-              value={value}
-              onChange={setValue}
-              schema={schema}
-              references={ExampleMap}
-              validator={ZodValidator}
-              onSubmit={setValidation}
-            />
-          </div>
-          <Card className="p-4 overflow-auto text-xs col-span-2">
-            <pre>{JSON.stringify(validation, null, 2)}</pre>
+        <JsonSchemaEditor
+          value={value}
+          onChange={setValue}
+          schema={schema}
+          references={ExampleMap}
+          validator={ZodValidator}
+          onSubmit={setValidation}
+          validationResult={validation}
+        />
+        <hr className="my-3" />
+        <div className="grid grid-cols-2 gap-4">
+          <Card type="secondary" className="p-4 overflow-auto text-xs">
+            <Text className="text-xs font-bold">Value</Text>
+            <hr className="my-2" />
+            <div className="overflow-auto">
+              <pre>{JSON.stringify(value, null, 2)}</pre>
+            </div>
+          </Card>
+          <Card type="secondary" className="p-4 text-xs">
+            <Text className="text-xs font-bold">Validation</Text>
+            <hr className="my-2" />
+            <div className="overflow-auto">
+              <pre>{JSON.stringify(validation, null, 2)}</pre>
+            </div>
           </Card>
         </div>
-        <hr className="my-3" />
-        <Card className="p-4 overflow-auto text-xs">
-          <pre>{JSON.stringify(value, null, 2)}</pre>
-        </Card>
       </div>
     );
   },

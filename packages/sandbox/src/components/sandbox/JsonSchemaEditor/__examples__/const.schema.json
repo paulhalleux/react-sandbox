@@ -1,0 +1,7 @@
+{
+  "$id": "https://example.com/const.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Constant",
+  "description": "A constant schema",
+  "const": "some constant value"
+}
