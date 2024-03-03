@@ -141,6 +141,8 @@ const TooltipContent = React.forwardRef<
   const context = useTooltipContext();
   const ref = useMergeRefs([context.refs.setFloating, propRef]);
 
+  if (!props.children) return null;
+
   return (
     <FloatingPortal>
       <AnimatePresence>

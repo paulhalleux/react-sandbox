@@ -30,6 +30,7 @@ type FieldProps<ValueType> = React.PropsWithChildren<{
   help?: string;
   example?: string;
   displayOptional?: boolean;
+  addon?: React.ReactNode;
   value?: ValueType;
   onChange?: (value: ValueType) => void;
 }>;
@@ -75,6 +76,7 @@ export function asField<ValueType, AdditionalProps = {}>(
           htmlFor={props.id}
           help={props.help ? <Text.Lines text={props.help} /> : undefined}
           requiredDisplay={props.displayOptional ? "optional" : "required"}
+          addon={props.addon}
         >
           <span className="flex items-center gap-1">{props.label}</span>
         </Label>
@@ -94,7 +96,7 @@ export function asField<ValueType, AdditionalProps = {}>(
   );
 }
 
-const InvalidProps = ["help", "example", "displayOptional"] as const;
+const InvalidProps = ["help", "example", "displayOptional", "addon"] as const;
 type InvalidPropsKeys = (typeof InvalidProps)[number];
 
 /**

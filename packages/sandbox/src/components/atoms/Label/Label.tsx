@@ -6,6 +6,7 @@ import { Text, Tooltip } from "..";
 type LabelProps = React.PropsWithChildren<{
   required?: boolean;
   help?: React.ReactNode;
+  addon?: React.ReactNode;
   htmlFor?: string;
   requiredDisplay?: "optional" | "required";
 }>;
@@ -16,6 +17,7 @@ export function Label({
   requiredDisplay = "required",
   htmlFor,
   help,
+  addon,
 }: LabelProps) {
   return (
     <Text size="xs" as="label" htmlFor={htmlFor} className="flex items-center">
@@ -38,6 +40,7 @@ export function Label({
           <Tooltip.Content>{help}</Tooltip.Content>
         </Tooltip>
       )}
+      {addon && <div className="ml-auto">{addon}</div>}
     </Text>
   );
 }

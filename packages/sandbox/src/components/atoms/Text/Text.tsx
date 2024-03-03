@@ -41,10 +41,11 @@ export function Text<ElementType extends React.ElementType = "p">({
 }
 
 type TextLinesProps = {
-  text: string;
+  text?: string;
 };
 
 function TextLines({ text }: TextLinesProps) {
+  if (!text) return null;
   return (
     <span>
       {text.split("\n").map((line, index, self) => (

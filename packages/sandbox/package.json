@@ -16,7 +16,7 @@
     "./style.css": "./dist/style.css"
   },
   "scripts": {
-    "dev": "storybook dev -p 6006",
+    "dev": "storybook dev -p 6006 -s public",
     "build": "yarn build:lib && yarn build:storybook && yarn build:tailwind",
     "build:lib": "tsc && vite build",
     "build:storybook": "storybook build",

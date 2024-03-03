@@ -37,5 +37,6 @@ export type BaseJsonSchemaType = {
   description?: string;
   default?: any;
   deprecated?: boolean;
+  deprecatedReason?: string;
   examples?: any[];
 };

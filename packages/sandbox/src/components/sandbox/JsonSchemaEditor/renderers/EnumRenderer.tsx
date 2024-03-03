@@ -4,6 +4,7 @@ import { Field } from "@/components/molecules";
 import { useJsonSchemaEditor } from "../JsonSchemaEditor.context";
 import { RendererProps } from "../SchemaRenderer";
 import { JsonSchemaEnum } from "../types";
+import { useDefaultRendererProps } from "../useDefaultRendererProps";
 
 const NullValue = "null";
 
@@ -15,8 +16,8 @@ export function EnumRenderer({
   required,
   path,
 }: RendererProps<JsonSchemaEnum>) {
-  const { getPropertyValue, setPropertyValue, validationResult } =
-    useJsonSchemaEditor();
+  const { getPropertyValue, setPropertyValue } = useJsonSchemaEditor();
+  const defaultProps = useDefaultRendererProps({ path, definition, required });
 
   const hasNull = definition.enum.includes(null);
 
@@ -35,16 +36,9 @@ export function EnumRenderer({
 
   return (
     <Field.Select
-      name={path}
-      id={path}
-      label={definition.title}
-      required={required}
       value={getValue(getPropertyValue(path) ?? NullValue)}
       onChange={onChange}
-      help={definition.$comment}
-      error={validationResult?.errors[path]?.message}
-      example={definition.examples?.[0]}
-      displayOptional
+      {...defaultProps}
     >
       {hasNull && (
         <Select.Option value={NullValue}>-- No value --</Select.Option>

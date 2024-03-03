@@ -1,0 +1,11 @@
+{
+  "$id": "https://example.com/deprecated.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Deprecated",
+  "description": "A deprecated string schema",
+  "type": "string",
+  "$comment": "A string is a sequence of characters.\n The default value is an empty string.\n The minimum length is 1 and the maximum length is 50.",
+  "default": "",
+  "deprecated": true,
+  "deprecatedReason": "This schema is deprecated.\nUse the new schema in deprecated-1.schema.json."
+}
