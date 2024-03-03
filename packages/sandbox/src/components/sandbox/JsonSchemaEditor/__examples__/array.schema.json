@@ -6,10 +6,11 @@
   "type": "array",
   "items": {
     "type": "integer",
-    "minimum": 0
+    "minimum": 0,
+    "default": 0
   },
   "minItems": 2,
   "maxItems": 10,
   "uniqueItems": true,
-  "default": [null, null]
+  "default": [1, 2, 3]
 }

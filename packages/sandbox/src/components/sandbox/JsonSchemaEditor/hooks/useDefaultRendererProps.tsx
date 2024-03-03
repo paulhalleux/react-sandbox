@@ -2,8 +2,8 @@ import { AlertTriangle } from "lucide-react";
 
 import { Text, Tooltip } from "@/components/atoms";
 
-import { useJsonSchemaEditor } from "./JsonSchemaEditor.context";
-import { JsonSchema } from "./types";
+import { useJsonSchemaEditor } from "../JsonSchemaEditor.context";
+import { JsonSchema } from "../types";
 
 type UseDefaultRendererPropsArgs = {
   path: string;

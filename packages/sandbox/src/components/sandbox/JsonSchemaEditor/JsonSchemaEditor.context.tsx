@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useContext } from "react";
+import React from "react";
 import { cloneDeep, get, set } from "lodash";
 
 import { RootPathKey } from "./constants";
@@ -6,7 +6,7 @@ import { JsonSchema, ValidationResult } from "./types";
 
 export type JsonSchemaEditorContextType = {
   value: any;
-  onChange: (value: any) => void;
+  onChange: React.Dispatch<React.SetStateAction<any>>;
   getPropertyValue: (propertyKey: string) => any;
   setPropertyValue: (propertyKey: string, value: any) => void;
   addArrayItem: (propertyKey: string, defaultValue?: any) => void;
@@ -29,9 +29,9 @@ const defaultValue: JsonSchemaEditorContextType = {
   schema: undefined,
 };
 
-export const JsonSchemaEditorContext = createContext(defaultValue);
+export const JsonSchemaEditorContext = React.createContext(defaultValue);
 
-type JsonSchemaEditorProviderProps = PropsWithChildren<{
+type JsonSchemaEditorProviderProps = React.PropsWithChildren<{
   value: any;
   onChange: (value: any) => void;
   references?: Record<string, JsonSchema>;
@@ -55,7 +55,9 @@ export function JsonSchemaEditorProvider({
 
   const setPropertyValue = (path: string, propertyValue: any) => {
     if (path === RootPathKey) return onChange(propertyValue);
-    onChange(set(cloneDeep(value), getPath(path), propertyValue));
+    onChange((prev: any) =>
+      set(cloneDeep(prev ?? {}), getPath(path), propertyValue)
+    );
   };
 
   const addArrayItem = (propertyKey: string, defaultValue: any = null) => {
@@ -98,7 +100,7 @@ export function JsonSchemaEditorProvider({
 }
 
 export function useJsonSchemaEditor() {
-  return useContext(JsonSchemaEditorContext);
+  return React.useContext(JsonSchemaEditorContext);
 }
 
 /**

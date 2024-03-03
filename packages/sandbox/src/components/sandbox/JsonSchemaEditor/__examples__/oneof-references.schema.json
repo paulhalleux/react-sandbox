@@ -1,0 +1,11 @@
+{
+  "$id": "https://example.com/oneof-references.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OneOf (references)",
+  "description": "A schema that uses oneOf with references to other schemas.",
+  "oneOf": [
+    { "$ref": "https://example.com/string.schema.json" },
+    { "$ref": "https://example.com/array.schema.json" }
+  ],
+  "default": {}
+}

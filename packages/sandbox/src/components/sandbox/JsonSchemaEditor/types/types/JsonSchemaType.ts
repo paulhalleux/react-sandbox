@@ -6,6 +6,7 @@ import {
   JsonSchemaNull,
   JsonSchemaNumeric,
   JsonSchemaObject,
+  JsonSchemaOneOf,
   JsonSchemaReference,
   JsonSchemaString,
 } from ".";
@@ -25,6 +26,7 @@ export type JsonSchemaType = BaseJsonSchemaType &
     | JsonSchemaEnum
     | JsonSchemaConst
     | JsonSchemaReference
+    | JsonSchemaOneOf
   );
 
 /**

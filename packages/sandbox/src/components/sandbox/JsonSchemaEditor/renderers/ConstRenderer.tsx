@@ -1,8 +1,8 @@
 import { Field } from "@/components/molecules";
 
+import { useDefaultRendererProps } from "../hooks/useDefaultRendererProps";
 import { RendererProps } from "../SchemaRenderer";
 import { JsonSchemaConst } from "../types";
-import { useDefaultRendererProps } from "../useDefaultRendererProps";
 
 /**
  * Renderer for const schema type

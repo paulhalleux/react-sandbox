@@ -1,10 +1,10 @@
 import { Select } from "@/components/atoms";
 import { Field } from "@/components/molecules";
 
+import { useDefaultRendererProps } from "../hooks/useDefaultRendererProps.tsx";
 import { useJsonSchemaEditor } from "../JsonSchemaEditor.context";
 import { RendererProps } from "../SchemaRenderer";
 import { JsonSchemaEnum } from "../types";
-import { useDefaultRendererProps } from "../useDefaultRendererProps";
 
 const NullValue = "null";
 

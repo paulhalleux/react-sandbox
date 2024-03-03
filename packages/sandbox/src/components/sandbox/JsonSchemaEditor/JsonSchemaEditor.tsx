@@ -51,7 +51,11 @@ export function JsonSchemaEditor({
       onReferenceRequest={onReferenceRequest}
     >
       <div className="space-y-2">
-        <SchemaRenderer path={RootPathKey} schema={schema} />
+        <SchemaRenderer
+          key={JSON.stringify(schema)}
+          path={RootPathKey}
+          schema={schema}
+        />
         <Button onClick={onFormSubmit}>Submit</Button>
       </div>
     </JsonSchemaEditorProvider>

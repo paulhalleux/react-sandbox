@@ -1,6 +1,8 @@
-import { ComponentType } from "react";
+import React from "react";
+import { useIsFirstRender } from "@uidotdev/usehooks";
 import isObject from "lodash/isObject";
 
+import { useJsonSchemaEditor } from "./JsonSchemaEditor.context";
 import {
   ArrayRenderer,
   ConstRenderer,
@@ -9,6 +11,7 @@ import {
   NullRenderer,
   NumberRenderer,
   ObjectRenderer,
+  OneOfRenderer,
   ReferenceRenderer,
   StringRenderer,
 } from "./renderers";
@@ -36,7 +39,10 @@ type SchemaRendererProps = {
 /**
  * Map of simple JSON schema types to their renderer components.
  */
-const SimpleTypesMap: Record<string, ComponentType<RendererProps<any>>> = {
+const SimpleTypesMap: Record<
+  string,
+  React.ComponentType<RendererProps<any>>
+> = {
   string: StringRenderer,
   object: ObjectRenderer,
   number: NumberRenderer,
@@ -52,7 +58,7 @@ const SpecificTypesMap: Record<
   string,
   {
     match: (schema: JsonSchema) => boolean;
-    component: ComponentType<RendererProps<any>>;
+    component: React.ComponentType<RendererProps<any>>;
   }
 > = {
   enum: {
@@ -67,6 +73,10 @@ const SpecificTypesMap: Record<
     match: (schema: JsonSchema) => "$ref" in schema,
     component: ReferenceRenderer,
   },
+  oneOf: {
+    match: (schema: JsonSchema) => "oneOf" in schema,
+    component: OneOfRenderer,
+  },
 };
 
 /**
@@ -79,6 +89,27 @@ export function SchemaRenderer({
   path,
   required = false,
 }: SchemaRendererProps) {
+  const { setPropertyValue, getPropertyValue } = useJsonSchemaEditor();
+  const isFirstRender = useIsFirstRender();
+
+  // Set the default value if it's the first render
+  // Should find a better way to do this, does the job for now
+  React.useLayoutEffect(() => {
+    if (!isFirstRender) {
+      return;
+    }
+
+    if (getPropertyValue(path) !== undefined) {
+      return;
+    }
+
+    if ("const" in schema) {
+      setPropertyValue(path, schema.const);
+    } else if ("default" in schema) {
+      setPropertyValue(path, schema.default);
+    }
+  }, [isFirstRender]);
+
   const type = getSchemaType(schema);
   const Renderer = type ? SimpleTypesMap[type] : undefined;
 

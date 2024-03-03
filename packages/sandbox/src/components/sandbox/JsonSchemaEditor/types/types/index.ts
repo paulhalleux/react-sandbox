@@ -8,3 +8,4 @@ export * from "./JsonSchemaBoolean.ts";
 export * from "./JsonSchemaEnum.ts";
 export * from "./JsonSchemaConst.ts";
 export * from "./JsonSchemaReference.ts";
+export * from "./JsonSchemaOneOf.ts";

@@ -1,0 +1,30 @@
+{
+  "$id": "https://example.com/oneof-objects.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OneOf (objects)",
+  "description": "A schema that uses oneOf to specify that a value must be one of a set of types",
+  "oneOf": [
+    {
+      "$id": "https://example.com/person.schema.json",
+      "title": "A person",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name of the person",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "$id": "https://example.com/car.schema.json",
+      "title": "A car",
+      "type": "object",
+      "properties": {
+        "owner": {
+          "title": "Owner of the car",
+          "type": "string"
+        }
+      }
+    }
+  ]
+}

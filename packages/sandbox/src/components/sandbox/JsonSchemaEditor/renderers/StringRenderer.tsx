@@ -1,9 +1,9 @@
 import { Field } from "@/components/molecules";
 
+import { useDefaultRendererProps } from "../hooks/useDefaultRendererProps";
 import { useJsonSchemaEditor } from "../JsonSchemaEditor.context";
 import { RendererProps } from "../SchemaRenderer";
 import { JsonSchemaString } from "../types";
-import { useDefaultRendererProps } from "../useDefaultRendererProps";
 
 /**
  * Renderer for string schema type

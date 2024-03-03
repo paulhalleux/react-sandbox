@@ -50,6 +50,9 @@ export function ArrayRenderer({
         >
           <AnimatePresence>
             {value.map((_: unknown, index: number) => {
+              // Ensure each item has a unique id
+              if (!valueIds[index]) valueIds[index] = getRandId();
+
               return (
                 <ArrayItemRenderer
                   key={valueIds[index]}

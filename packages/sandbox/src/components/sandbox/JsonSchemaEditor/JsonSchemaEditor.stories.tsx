@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Select, Text } from "@/components/atoms";
+import { Select, Text, Tooltip } from "@/components/atoms";
 import { Card } from "@/components/containers";
 
 import { Examples } from "./__examples__";
@@ -37,10 +37,9 @@ export const Default: StoryObj = {
 
     return (
       <div>
-        <Select title={JSON.stringify(schema, null, 4)}>
+        <Select>
           {Examples.map((example) => (
             <Select.Option
-              title={JSON.stringify(example, null, 4)}
               key={example.title}
               value={example.title}
               onClick={() => {
@@ -53,6 +52,16 @@ export const Default: StoryObj = {
             </Select.Option>
           ))}
         </Select>
+        <Tooltip placement="bottom-start">
+          <Tooltip.Trigger>
+            <Text size="xs" className="mt-2" tabIndex={0}>
+              Hover to see schema
+            </Text>
+          </Tooltip.Trigger>
+          <Tooltip.Content className="!text-left max-w-[unset]">
+            <pre>{JSON.stringify(schema, null, 2)}</pre>
+          </Tooltip.Content>
+        </Tooltip>
         <hr className="my-3" />
         <JsonSchemaEditor
           value={value}

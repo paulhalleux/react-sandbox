@@ -14,6 +14,7 @@ import {
   useMergeRefs,
   useRole,
 } from "@floating-ui/react";
+import { clsx } from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 
 // see https://codesandbox.io/p/sandbox/xenodochial-grass-js3bo9?file=%2Fsrc%2FTooltip.tsx%3A1%2C1-159%2C4
@@ -137,7 +138,7 @@ const TooltipTrigger = React.forwardRef<HTMLElement, TooltipTriggerProps>(
 const TooltipContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLProps<HTMLDivElement>
->(function TooltipContent({ style, ...props }, propRef) {
+>(function TooltipContent({ style, className, ...props }, propRef) {
   const context = useTooltipContext();
   const ref = useMergeRefs([context.refs.setFloating, propRef]);
 
@@ -152,7 +153,10 @@ const TooltipContent = React.forwardRef<
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             ref={ref}
-            className="bg-black/75 text-white px-2 py-1 rounded text-xs max-w-md text-center"
+            className={clsx(
+              "bg-black/75 text-white px-2 py-1 rounded text-xs max-w-md text-center",
+              className
+            )}
             style={{
               ...context.floatingStyles,
               ...style,
