@@ -20,11 +20,13 @@ const config: Config = {
       sm: "5px",
       md: "7px",
       lg: "8px",
+      full: "9999px",
+      none: "0",
     },
-    placeholderColor: (utils) => ({
-      DEFAULT: utils.theme("colors.gray.400"),
-    }),
     extend: {
+      placeholderColor: (utils) => ({
+        DEFAULT: utils.theme("colors.gray.400"),
+      }),
       textColor: (utils) => ({
         DEFAULT: utils.theme("colors.gray.800"),
         default: utils.theme("colors.gray.800"),

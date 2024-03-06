@@ -10,6 +10,15 @@ const meta: Meta = {
     required: {
       control: { type: "boolean" },
     },
+    help: {
+      control: { type: "text" },
+    },
+    addon: {
+      control: { type: "text" },
+    },
+    htmlFor: {
+      control: { disable: true },
+    },
   },
 };
 
@@ -19,5 +28,8 @@ export const Default = {
   args: {
     children: "Hello, world!",
     required: false,
+    help: "This is a help message.",
+    addon: "This is an addon",
+    requiredDisplay: "optional",
   },
 };

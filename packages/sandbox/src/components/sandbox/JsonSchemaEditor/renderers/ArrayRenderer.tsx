@@ -35,7 +35,7 @@ export function ArrayRenderer({
   };
 
   return (
-    <Card className="p-4">
+    <Card className="p-4 w-full">
       <Fieldset legend={definition.title} description={definition.description}>
         <Reorder.Group
           values={valueIds}

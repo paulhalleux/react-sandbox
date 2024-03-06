@@ -9,7 +9,7 @@ import { JsonSchemaEnum } from "../types";
 const NullValue = "null";
 
 /**
- * Renderer for null schema type
+ * Renderer for enum schema type
  */
 export function EnumRenderer({
   definition,

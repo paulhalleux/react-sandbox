@@ -7,6 +7,8 @@ import {
   Label,
   Select,
   type SelectProps,
+  Switch,
+  type SwitchProps,
   Text,
 } from "@/components/atoms";
 
@@ -52,6 +54,15 @@ export const Field = {
       <Select onChange={(e) => onChange?.(e.target.value)} {...props}>
         {props.children}
       </Select>
+    );
+  }),
+  Switch: asField<boolean, SwitchProps>(({ onChange, value, ...props }) => {
+    return (
+      <Switch
+        checked={value}
+        onChange={(e) => onChange?.(e.target.checked)}
+        {...omit(props, ["label"])}
+      />
     );
   }),
 };

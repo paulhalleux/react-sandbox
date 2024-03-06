@@ -4,3 +4,5 @@ export * from "./Text";
 export * from "./Label";
 export * from "./Select";
 export * from "./Tooltip";
+export * from "./Switch";
+export * from "./FileInput";

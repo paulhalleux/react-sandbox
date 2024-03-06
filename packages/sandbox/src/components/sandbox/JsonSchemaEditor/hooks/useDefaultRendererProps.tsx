@@ -29,7 +29,7 @@ export function useDefaultRendererProps({
     help: definition.$comment,
     example: definition.examples?.[0],
     error: validationResult?.errors[path]?.message,
-    displayOptional: true,
+    displayOptional: false,
     required,
     addon: definition.deprecated ? (
       <Tooltip>

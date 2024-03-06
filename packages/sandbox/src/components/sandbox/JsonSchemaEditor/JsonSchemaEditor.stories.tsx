@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Select, Text, Tooltip } from "@/components/atoms";
+import { FileInput, Select, Text, Tooltip } from "@/components/atoms";
 import { Card } from "@/components/containers";
 
 import { Examples } from "./__examples__";
@@ -89,6 +89,56 @@ export const Default: StoryObj = {
             </div>
           </Card>
         </div>
+      </div>
+    );
+  },
+};
+
+export const Custom: StoryObj = {
+  render: function Render() {
+    const [schema, setSchema] = useState<JsonSchema>();
+    const [value, setValue] = useState<any>({});
+
+    const onFileChange = (files: FileList | null) => {
+      const file = files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (e.target?.result) {
+            try {
+              const schema = JSON.parse(e.target.result as string);
+              setSchema(schema);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        };
+        reader.readAsText(file);
+      }
+    };
+
+    return (
+      <div>
+        <FileInput onChange={onFileChange} />
+        <hr className="my-3" />
+
+        <JsonSchemaEditor
+          value={value}
+          onChange={setValue}
+          schema={schema}
+          references={{}}
+          validator={ZodValidator}
+          onSubmit={() => {}}
+          validationResult={undefined}
+        />
+        <hr className="my-3" />
+        <Card type="secondary" className="p-4 overflow-auto text-xs">
+          <Text className="text-xs font-bold">Value</Text>
+          <hr className="my-2" />
+          <div className="overflow-auto">
+            <pre>{JSON.stringify(value, null, 2)}</pre>
+          </div>
+        </Card>
       </div>
     );
   },

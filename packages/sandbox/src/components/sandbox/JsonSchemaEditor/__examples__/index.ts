@@ -3,6 +3,7 @@ import { JsonSchema } from "../types";
 import AlphaNumeric from "./alphanumeric.schema.json";
 import Array from "./array.schema.json";
 import ArrayReference from "./array-reference.schema.json";
+import Boolean from "./boolean.schema.json";
 import Const from "./const.schema.json";
 import Deprecated from "./deprecated.schema.json";
 import EmailAddress from "./email.schema.json";
@@ -22,6 +23,7 @@ export const Examples = [
   EmailAddress,
   Number,
   Integer,
+  Boolean,
   Null,
   Enum,
   Const,

@@ -5,6 +5,7 @@ import isObject from "lodash/isObject";
 import { useJsonSchemaEditor } from "./JsonSchemaEditor.context";
 import {
   ArrayRenderer,
+  BooleanRenderer,
   ConstRenderer,
   EnumRenderer,
   IntegerRenderer,
@@ -47,6 +48,7 @@ const SimpleTypesMap: Record<
   object: ObjectRenderer,
   number: NumberRenderer,
   integer: IntegerRenderer,
+  boolean: BooleanRenderer,
   null: NullRenderer,
   array: ArrayRenderer,
 };
