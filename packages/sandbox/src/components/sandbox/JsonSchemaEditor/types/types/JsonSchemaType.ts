@@ -1,4 +1,7 @@
+import { JsonSchema, JsonSchemaDisplayOptions } from "..";
+
 import {
+  JsonSchemaAllOf,
   JsonSchemaArray,
   JsonSchemaBoolean,
   JsonSchemaConst,
@@ -15,19 +18,18 @@ import {
  * Validation type for JSON Schema
  * @see https://json-schema.org/understanding-json-schema/reference/type
  */
-export type JsonSchemaType = BaseJsonSchemaType &
-  (
-    | JsonSchemaString
-    | JsonSchemaObject
-    | JsonSchemaNumeric
-    | JsonSchemaNull
-    | JsonSchemaArray
-    | JsonSchemaBoolean
-    | JsonSchemaEnum
-    | JsonSchemaConst
-    | JsonSchemaReference
-    | JsonSchemaOneOf
-  );
+export type JsonSchemaType =
+  | JsonSchemaString
+  | JsonSchemaObject
+  | JsonSchemaNumeric
+  | JsonSchemaNull
+  | JsonSchemaArray
+  | JsonSchemaBoolean
+  | JsonSchemaEnum
+  | JsonSchemaConst
+  | JsonSchemaReference
+  | JsonSchemaOneOf
+  | JsonSchemaAllOf;
 
 /**
  * Base JSON schema value type
@@ -35,6 +37,15 @@ export type JsonSchemaType = BaseJsonSchemaType &
  */
 export type BaseJsonSchemaType = {
   $comment?: string;
+  $id?: string;
+  $schema?: string;
+  $defs?: Record<string, JsonSchema>;
+  $dynamicAnchor?: string;
+  $anchor?: string;
+  $ref?: string;
+  $dynamicRef?: string;
+  $display?: JsonSchemaDisplayOptions;
+  definitions?: Record<string, JsonSchema>;
   title?: string;
   description?: string;
   default?: any;

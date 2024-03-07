@@ -1,5 +1,7 @@
 import { JsonSchema } from "../types";
 
+import AllOfObjects from "./allof-objects.schema.json";
+import AllOfReferences from "./allof-references.schema.json";
 import AlphaNumeric from "./alphanumeric.schema.json";
 import Array from "./array.schema.json";
 import ArrayReference from "./array-reference.schema.json";
@@ -39,6 +41,8 @@ export const Examples = [
   Reference,
   OneOfObjects,
   OneOfReferences,
+  AllOfObjects,
+  AllOfReferences,
   Object2Columns,
   Object3Columns,
   ObjectNoWrapper,

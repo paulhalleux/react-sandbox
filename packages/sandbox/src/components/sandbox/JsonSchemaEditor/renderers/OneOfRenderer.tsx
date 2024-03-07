@@ -4,7 +4,7 @@ import { Select, Text } from "@/components/atoms";
 import { Card, Fieldset } from "@/components/containers";
 import { Field } from "@/components/molecules";
 
-import { useOneOfSchemas } from "../hooks/useOneOfSchemas.ts";
+import { useResolvedSchemas } from "../hooks/useResolvedSchemas.ts";
 import { useJsonSchemaEditor } from "../JsonSchemaEditor.context";
 import { RendererProps, SchemaRenderer } from "../SchemaRenderer";
 import { JsonSchemaOneOf } from "../types";
@@ -16,12 +16,10 @@ export function OneOfRenderer({
   definition,
   path,
 }: RendererProps<JsonSchemaOneOf>) {
-  const { references, requestReference, setPropertyValue, getPropertyValue } =
-    useJsonSchemaEditor();
-  const { schemas } = useOneOfSchemas({
+  const { setPropertyValue, getPropertyValue } = useJsonSchemaEditor();
+  const { schemas } = useResolvedSchemas({
     definition,
-    references,
-    requestReference,
+    schemas: definition.oneOf,
   });
 
   const areSchemasValid = schemas.every((schema) => !!schema.$id);

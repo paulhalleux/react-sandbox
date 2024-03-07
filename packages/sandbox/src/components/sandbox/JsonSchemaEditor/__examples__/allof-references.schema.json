@@ -1,0 +1,38 @@
+{
+  "$id": "https://example.com/allof-references.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AllOf (references)",
+  "description": "A schema that uses allOf with references to other schemas.",
+  "definitions": {
+    "obj1": {
+      "type": "object",
+      "properties": {
+        "string": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "string"
+      ]
+    },
+    "obj2": {
+      "type": "object",
+      "properties": {
+        "array": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "array"
+      ]
+    }
+  },
+  "allOf": [
+    { "$ref": "#/definitions/obj1" },
+    { "$ref": "#/definitions/obj2" }
+  ],
+  "default": {}
+}

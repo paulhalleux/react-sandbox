@@ -1,17 +1,7 @@
-import { JsonSchemaType } from "./types";
+import { BaseJsonSchemaType, JsonSchemaType } from "./types";
 
 /**
  * JSON Schema type
  * @see https://json-schema.org/
  */
-export type JsonSchema =
-  | {
-      $id?: string;
-      $schema?: string;
-      $comment?: string;
-      $defs?: Record<string, JsonSchema>;
-      $dynamicAnchor?: string;
-      $anchor?: string;
-      $ref?: string;
-      $dynamicRef?: string;
-    } & JsonSchemaType;
+export type JsonSchema = BaseJsonSchemaType & JsonSchemaType;

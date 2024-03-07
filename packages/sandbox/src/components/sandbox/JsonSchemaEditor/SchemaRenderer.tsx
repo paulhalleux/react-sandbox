@@ -3,19 +3,7 @@ import { useIsFirstRender } from "@uidotdev/usehooks";
 import isObject from "lodash/isObject";
 
 import { useJsonSchemaEditor } from "./JsonSchemaEditor.context";
-import {
-  ArrayRenderer,
-  BooleanRenderer,
-  ConstRenderer,
-  EnumRenderer,
-  IntegerRenderer,
-  NullRenderer,
-  NumberRenderer,
-  ObjectRenderer,
-  OneOfRenderer,
-  ReferenceRenderer,
-  StringRenderer,
-} from "./renderers";
+import * as Renderer from "./renderers";
 import { BaseJsonSchemaType, JsonSchema, JsonSchemaType } from "./types";
 
 /**
@@ -44,13 +32,13 @@ const SimpleTypesMap: Record<
   string,
   React.ComponentType<RendererProps<any>>
 > = {
-  string: StringRenderer,
-  object: ObjectRenderer,
-  number: NumberRenderer,
-  integer: IntegerRenderer,
-  boolean: BooleanRenderer,
-  null: NullRenderer,
-  array: ArrayRenderer,
+  string: Renderer.StringRenderer,
+  object: Renderer.ObjectRenderer,
+  number: Renderer.NumberRenderer,
+  integer: Renderer.IntegerRenderer,
+  boolean: Renderer.BooleanRenderer,
+  null: Renderer.NullRenderer,
+  array: Renderer.ArrayRenderer,
 };
 
 /**
@@ -65,19 +53,23 @@ const SpecificTypesMap: Record<
 > = {
   enum: {
     match: (schema: JsonSchema) => "enum" in schema,
-    component: EnumRenderer,
+    component: Renderer.EnumRenderer,
   },
   const: {
     match: (schema: JsonSchema) => "const" in schema,
-    component: ConstRenderer,
+    component: Renderer.ConstRenderer,
   },
   reference: {
     match: (schema: JsonSchema) => "$ref" in schema,
-    component: ReferenceRenderer,
+    component: Renderer.ReferenceRenderer,
   },
   oneOf: {
     match: (schema: JsonSchema) => "oneOf" in schema,
-    component: OneOfRenderer,
+    component: Renderer.OneOfRenderer,
+  },
+  allOf: {
+    match: (schema: JsonSchema) => "allOf" in schema,
+    component: Renderer.AllOfRenderer,
   },
 };
 

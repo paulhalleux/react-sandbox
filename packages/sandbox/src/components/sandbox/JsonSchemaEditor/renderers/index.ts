@@ -9,3 +9,4 @@ export { ConstRenderer } from "./ConstRenderer.tsx";
 export { ReferenceRenderer } from "./ReferenceRenderer.tsx";
 export { OneOfRenderer } from "./OneOfRenderer.tsx";
 export { BooleanRenderer } from "./BooleanRenderer.tsx";
+export { AllOfRenderer } from "./AllOfRenderer.tsx";
