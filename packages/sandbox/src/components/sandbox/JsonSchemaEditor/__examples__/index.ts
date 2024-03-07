@@ -15,6 +15,7 @@ import Null from "./null.schema.json";
 import Number from "./number.schema.json";
 import Object2Columns from "./object-2-cols.schema.json";
 import Object3Columns from "./object-3-cols.schema.json";
+import ObjectNoWrapper from "./object-no-wrapper.schema.json";
 import OneOfObjects from "./oneof-objects.schema.json";
 import OneOfReferences from "./oneof-references.schema.json";
 import Reference from "./reference.schema.json";
@@ -40,6 +41,7 @@ export const Examples = [
   OneOfReferences,
   Object2Columns,
   Object3Columns,
+  ObjectNoWrapper,
   DependentRequired,
   DependentSchemas,
 ] as JsonSchema[];

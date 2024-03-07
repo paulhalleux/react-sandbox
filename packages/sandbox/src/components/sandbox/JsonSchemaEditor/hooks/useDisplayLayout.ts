@@ -1,4 +1,4 @@
-import { JsonSchemaDisplayOptions } from "../types/JsonSchemaDisplayOptions";
+import { JsonSchemaDisplayOptions } from "../types";
 
 type UseDisplayLayoutArgs = {
   display: JsonSchemaDisplayOptions | undefined;
@@ -7,9 +7,13 @@ type UseDisplayLayoutArgs = {
 /**
  * Hook to get layout for display options
  */
-export function useDisplayLayout({ display }: UseDisplayLayoutArgs) {
+export function useDisplayLayout({ display }: UseDisplayLayoutArgs): {
+  className: string | undefined;
+} {
   if (!display) {
-    return {};
+    return {
+      className: undefined,
+    };
   }
 
   const { layout } = display;
@@ -19,5 +23,7 @@ export function useDisplayLayout({ display }: UseDisplayLayoutArgs) {
     };
   }
 
-  return {};
+  return {
+    className: undefined,
+  };
 }

@@ -1,4 +1,3 @@
-import { JsonSchemaDisplayOptions } from "../JsonSchemaDisplayOptions";
 import { JsonSchema } from "..";
 
 /**
@@ -13,4 +12,20 @@ export type JsonSchemaObject = {
   required?: string[];
   dependentRequired?: Record<string, string[]>;
   dependentSchemas?: Record<string, JsonSchema>;
+};
+
+/**
+ * Display options for the JSON schema editor
+ */
+export type JsonSchemaDisplayOptions = {
+  layout: LayoutColumn;
+  contained?: boolean;
+};
+
+/**
+ * Layout options for the JSON schema editor
+ */
+export type LayoutColumn = {
+  type: "columns";
+  columns: number;
 };

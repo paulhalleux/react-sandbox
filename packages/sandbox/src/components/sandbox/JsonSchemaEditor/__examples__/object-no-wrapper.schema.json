@@ -1,0 +1,25 @@
+{
+  "$id": "https://example.com/object-no-wrapper.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Object (No Wrapper)",
+  "description": "A simple object with two string properties, no wrapper.",
+  "type": "object",
+  "properties": {
+    "column1": {
+      "type": "string",
+      "title": "Column 1"
+    },
+    "column2": {
+      "type": "string",
+      "title": "Column 2"
+    }
+  },
+  "default": {},
+  "$display": {
+    "layout": {
+      "type": "columns",
+      "columns": 2
+    },
+    "contained": false
+  }
+}
