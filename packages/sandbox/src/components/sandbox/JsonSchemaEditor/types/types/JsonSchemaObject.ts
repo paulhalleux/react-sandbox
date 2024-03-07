@@ -1,3 +1,4 @@
+import { JsonSchemaDisplayOptions } from "../JsonSchemaDisplayOptions";
 import { JsonSchema } from "..";
 
 /**
@@ -5,6 +6,7 @@ import { JsonSchema } from "..";
  */
 export type JsonSchemaObject = {
   type: "object";
+  $display?: JsonSchemaDisplayOptions;
   properties: Record<string, JsonSchema>;
   minProperties?: number;
   maxProperties?: number;

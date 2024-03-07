@@ -1,0 +1,24 @@
+{
+  "$id": "https://example.com/object-2-cols.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Object (2 columns)",
+  "description": "An object with 2 columns display",
+  "type": "object",
+  "properties": {
+    "column1": {
+      "type": "string",
+      "title": "Column 1"
+    },
+    "column2": {
+      "type": "string",
+      "title": "Column 2"
+    }
+  },
+  "default": {},
+  "$display": {
+    "layout": {
+      "type": "columns",
+      "columns": 2
+    }
+  }
+}

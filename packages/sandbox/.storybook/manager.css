@@ -23,7 +23,8 @@
   border-top: 1px solid rgba(0,0,0,0.5);
   border-right: 1px solid rgba(0,0,0,0.5);
   transform: rotate(45deg);
-  transition: transform 0.15s ease-in-out, margin-top 0.15s ease-in-out; !important;
+  transition: transform 0.15s ease-in-out, margin-top 0.15s ease-in-out !important;
+  font-size: 12px !important;
 }
 
 .sidebar-item div > span {

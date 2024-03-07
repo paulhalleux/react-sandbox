@@ -1,0 +1,28 @@
+{
+  "$id": "https://example.com/object-3-cols.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Object (3 columns)",
+  "description": "An object with 3 columns display",
+  "type": "object",
+  "properties": {
+    "column1": {
+      "type": "string",
+      "title": "Column 1"
+    },
+    "column2": {
+      "type": "string",
+      "title": "Column 2"
+    },
+    "column3": {
+      "type": "string",
+      "title": "Column 3"
+    }
+  },
+  "default": {},
+  "$display": {
+    "layout": {
+      "type": "columns",
+      "columns": 3
+    }
+  }
+}

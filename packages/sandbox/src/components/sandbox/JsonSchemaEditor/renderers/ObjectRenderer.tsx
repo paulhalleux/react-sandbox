@@ -1,4 +1,7 @@
+import { clsx } from "clsx";
+
 import { Card, Fieldset } from "@/components/containers";
+import { useDisplayLayout } from "@/components/sandbox/JsonSchemaEditor/hooks/useDisplayLayout.ts";
 
 import { RendererProps, SchemaRenderer } from "../SchemaRenderer";
 import { JsonSchemaObject } from "../types";
@@ -10,6 +13,8 @@ export function ObjectRenderer({
   definition,
   path,
 }: RendererProps<JsonSchemaObject>) {
+  const { className } = useDisplayLayout({ display: definition.$display });
+
   if (!definition.properties) {
     return null;
   }
@@ -19,7 +24,7 @@ export function ObjectRenderer({
       <Fieldset
         legend={definition.title}
         description={definition.description}
-        className="gap-2.5"
+        className={clsx("gap-2.5", className)}
       >
         {Object.entries(definition.properties).map(([key, schema]) => (
           <SchemaRenderer

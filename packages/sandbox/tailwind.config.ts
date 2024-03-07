@@ -10,6 +10,11 @@ const colorShades = {
 
 const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],
+  safelist: [
+    {
+      pattern: /grid-cols-\d/,
+    },
+  ],
   theme: {
     fontFamily: {
       sans: ["Inter", "sans-serif"],

@@ -11,6 +11,8 @@ import Enum from "./enum.schema.json";
 import Integer from "./integer.schema.json";
 import Null from "./null.schema.json";
 import Number from "./number.schema.json";
+import Object2Columns from "./object-2-cols.schema.json";
+import Object3Columns from "./object-3-cols.schema.json";
 import OneOfObjects from "./oneof-objects.schema.json";
 import OneOfReferences from "./oneof-references.schema.json";
 import Reference from "./reference.schema.json";
@@ -34,4 +36,6 @@ export const Examples = [
   Reference,
   OneOfObjects,
   OneOfReferences,
+  Object2Columns,
+  Object3Columns,
 ] as JsonSchema[];
