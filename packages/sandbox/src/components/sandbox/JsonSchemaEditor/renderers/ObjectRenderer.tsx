@@ -2,6 +2,7 @@ import { clsx } from "clsx";
 
 import { Card, Fieldset } from "@/components/containers";
 import { useDisplayLayout } from "@/components/sandbox/JsonSchemaEditor/hooks/useDisplayLayout.ts";
+import { usePropertyRequired } from "@/components/sandbox/JsonSchemaEditor/hooks/usePropertyRequired.ts";
 
 import { RendererProps, SchemaRenderer } from "../SchemaRenderer";
 import { JsonSchemaObject } from "../types";
@@ -14,6 +15,7 @@ export function ObjectRenderer({
   path,
 }: RendererProps<JsonSchemaObject>) {
   const { className } = useDisplayLayout({ display: definition.$display });
+  const { isRequired } = usePropertyRequired({ definition });
 
   if (!definition.properties) {
     return null;
@@ -31,7 +33,7 @@ export function ObjectRenderer({
             key={key}
             path={`${path}.${key}`}
             schema={schema}
-            required={definition.required?.includes(key)}
+            required={isRequired(key)}
           />
         ))}
       </Fieldset>

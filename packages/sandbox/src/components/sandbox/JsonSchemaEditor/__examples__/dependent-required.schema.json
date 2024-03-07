@@ -1,0 +1,26 @@
+{
+  "$id": "https://example.com/dependent-required.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dependant Required",
+  "description": "A schema with a dependent required property",
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "Name of the customer",
+      "type": "string"
+    },
+    "billing_address": {
+      "title": "Billing address",
+      "type": "string"
+    },
+    "credit_card": {
+      "$comment": "This field is required if the billing address field is present",
+      "title": "Credit card details",
+      "type": "number"
+    }
+  },
+  "required": ["name"],
+  "dependentRequired": {
+    "credit_card": ["billing_address"]
+  }
+}
