@@ -4,6 +4,7 @@ import { Card, Fieldset } from "@/components/containers";
 import { useDisplayLayout } from "@/components/sandbox/JsonSchemaEditor/hooks/useDisplayLayout.ts";
 import { usePropertyRequired } from "@/components/sandbox/JsonSchemaEditor/hooks/usePropertyRequired.ts";
 
+import { useDependentSchemas } from "../hooks/useDependentSchemas";
 import { RendererProps, SchemaRenderer } from "../SchemaRenderer";
 import { JsonSchemaObject } from "../types";
 
@@ -16,6 +17,7 @@ export function ObjectRenderer({
 }: RendererProps<JsonSchemaObject>) {
   const { className } = useDisplayLayout({ display: definition.$display });
   const { isRequired } = usePropertyRequired({ definition });
+  const { dependentSchemas } = useDependentSchemas({ definition });
 
   if (!definition.properties) {
     return null;
@@ -36,6 +38,21 @@ export function ObjectRenderer({
             required={isRequired(key)}
           />
         ))}
+        {dependentSchemas.map((schema, index) => {
+          const schemaPath =
+            "type" in schema && schema.type === "object"
+              ? path
+              : `${path}.${schema.$id}`;
+
+          return (
+            <SchemaRenderer
+              key={schema.$id || index}
+              path={schemaPath}
+              schema={schema}
+              required={true}
+            />
+          );
+        })}
       </Fieldset>
     </Card>
   );

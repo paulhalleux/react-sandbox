@@ -19,7 +19,5 @@ export function useDisplayLayout({ display }: UseDisplayLayoutArgs) {
     };
   }
 
-  return {
-    className: undefined,
-  };
+  return {};
 }

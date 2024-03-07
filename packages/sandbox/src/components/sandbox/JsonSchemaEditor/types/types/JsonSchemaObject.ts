@@ -12,4 +12,5 @@ export type JsonSchemaObject = {
   maxProperties?: number;
   required?: string[];
   dependentRequired?: Record<string, string[]>;
+  dependentSchemas?: Record<string, JsonSchema>;
 };

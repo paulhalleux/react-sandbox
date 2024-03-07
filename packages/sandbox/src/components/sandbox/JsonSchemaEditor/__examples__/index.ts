@@ -6,6 +6,7 @@ import ArrayReference from "./array-reference.schema.json";
 import Boolean from "./boolean.schema.json";
 import Const from "./const.schema.json";
 import DependentRequired from "./dependent-required.schema.json";
+import DependentSchemas from "./dependent-schemas.schema.json";
 import Deprecated from "./deprecated.schema.json";
 import EmailAddress from "./email.schema.json";
 import Enum from "./enum.schema.json";
@@ -40,4 +41,5 @@ export const Examples = [
   Object2Columns,
   Object3Columns,
   DependentRequired,
+  DependentSchemas,
 ] as JsonSchema[];

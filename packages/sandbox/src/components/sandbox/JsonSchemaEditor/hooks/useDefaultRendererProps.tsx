@@ -20,7 +20,6 @@ export function useDefaultRendererProps({
   required,
 }: UseDefaultRendererPropsArgs) {
   const { validationResult } = useJsonSchemaEditor();
-
   return {
     id: path,
     name: path,
