@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { clsx } from "clsx";
 
-import { Avatar, AvatarProps, Text, Tooltip } from "@/components/atoms";
+import { Avatar, AvatarProps, Text } from "@/components/atoms";
 import { avatarStyles } from "@/components/atoms/Avatar/Avatar.styles";
 import { ContextMenu } from "@/components/molecules";
 
@@ -28,24 +28,17 @@ export function AvatarGroup({
   const classes = avatarStyles({ size });
 
   return (
-    <div className={clsx("flex -space-x-2", className)} {...props}>
+    <div className={clsx("flex -space-x-1.5", className)} {...props}>
       {AvatarChildren.slice(0, correctedMax).map((child) => {
         if (!React.isValidElement<React.ComponentProps<typeof Avatar>>(child))
           return null;
 
-        return (
-          <Tooltip key={child.key} placement="top">
-            <Tooltip.Trigger>
-              {renderAvatar(
-                React.cloneElement(child, {
-                  size,
-                  className: clsx(classes, "border-2 border-white"),
-                }),
-                child.props
-              )}
-            </Tooltip.Trigger>
-            <Tooltip.Content>{child.props.name}</Tooltip.Content>
-          </Tooltip>
+        return renderAvatar(
+          React.cloneElement(child, {
+            size,
+            className: clsx(classes, "ring-[3px] ring-white"),
+          }),
+          child.props
         );
       })}
       {correctedMax < ChildrenArray.length && (
@@ -55,7 +48,7 @@ export function AvatarGroup({
             <button
               className={clsx(
                 classes,
-                "cursor-pointer border-2 border-white bg-gray-100"
+                "cursor-pointer ring-[3px] ring-white bg-gray-100"
               )}
             >
               +{ChildrenArray.length - correctedMax}

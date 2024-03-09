@@ -85,6 +85,7 @@ export function ContextMenuItem({
     <Component
       className={clsx(
         "w-full px-2 py-1.5 text-left inline-flex items-center",
+        "focus:outline-none focus:bg-gray-50",
         {
           "hover:bg-gray-50 active:bg-gray-100": !displayOnly,
         },

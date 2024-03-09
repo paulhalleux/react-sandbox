@@ -22,11 +22,11 @@ export const Default: StoryObj<typeof meta> = {
         <ContextMenu.Search />
         <ContextMenu.Title>Menu Title</ContextMenu.Title>
         <ContextMenu.Submenu label="Submenu">
-          <ContextMenu.Item>Item 1</ContextMenu.Item>
+          <ContextMenu.Item autoFocus>Item 1</ContextMenu.Item>
           <ContextMenu.Item>Item 2</ContextMenu.Item>
           <ContextMenu.Item>Item 3</ContextMenu.Item>
           <ContextMenu.Submenu label="Submenu">
-            <ContextMenu.Item>Item 1</ContextMenu.Item>
+            <ContextMenu.Item autoFocus>Item 1</ContextMenu.Item>
             <ContextMenu.Item>Item 2</ContextMenu.Item>
             <ContextMenu.Item>Item 3</ContextMenu.Item>
           </ContextMenu.Submenu>

@@ -49,21 +49,23 @@ export function ColumnSelector<TColumn extends BaseColumn>({
       <ContextMenu.Title>Columns</ContextMenu.Title>
       <AnimatePresence mode="wait">
         <Reorder.Group onReorder={onColumnsReorder} values={columns}>
-          {filteredColumns.map((column) => (
-            <ColumnSelectorItem
-              key={column.id}
-              disableReorder={search.length > 0}
-              column={column}
-              active={active.includes(column.id)}
-              setActive={(isActive) =>
-                onColumnsActivate(
-                  isActive
-                    ? [...active, column.id]
-                    : active.filter((id) => id !== column.id)
-                )
-              }
-            />
-          ))}
+          <AnimatePresence initial={false}>
+            {filteredColumns.map((column) => (
+              <ColumnSelectorItem
+                key={column.id}
+                disableReorder={search.length > 0}
+                column={column}
+                active={active.includes(column.id)}
+                setActive={(isActive) =>
+                  onColumnsActivate(
+                    isActive
+                      ? [...active, column.id]
+                      : active.filter((id) => id !== column.id)
+                  )
+                }
+              />
+            ))}
+          </AnimatePresence>
         </Reorder.Group>
       </AnimatePresence>
       <ContextMenu.Footer>
@@ -94,6 +96,9 @@ function ColumnSelectorItem({
   const dragControls = useDragControls();
   return (
     <Reorder.Item
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: "auto" }}
+      exit={{ opacity: 0, height: 0, overflow: "hidden" }}
       value={column}
       dragControls={dragControls}
       dragListener={false}

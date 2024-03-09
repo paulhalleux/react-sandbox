@@ -24,6 +24,7 @@ export function Avatar({
   const classes = avatarStyles({ size, className });
   return (
     <figure
+      title={name}
       className={classes}
       {...props}
       style={{ backgroundColor: color, color: textColor }}
