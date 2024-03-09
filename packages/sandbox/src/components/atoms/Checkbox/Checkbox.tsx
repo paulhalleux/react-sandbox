@@ -37,7 +37,7 @@ export function Checkbox({
         {...props}
       />
       <div className={classes} />
-      {label}
+      <span className="grid">{label}</span>
     </label>
   );
 }

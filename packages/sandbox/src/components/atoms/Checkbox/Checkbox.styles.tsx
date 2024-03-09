@@ -3,6 +3,7 @@ import { tv, VariantProps } from "tailwind-variants";
 
 export const checkboxStyles = tv({
   base: clsx(
+    "grow shrink-0",
     "relative border rounded-sm peer bg-gray-50 h-4 w-4",
     "peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-gray-100 peer-focus:ring-offset-0",
     "peer-checked:bg-blue-500/30 peer-checked:border-blue-500 transition-colors peer-checked:peer-focus:ring-blue-100",

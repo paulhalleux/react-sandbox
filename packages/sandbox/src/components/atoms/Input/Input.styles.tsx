@@ -11,7 +11,8 @@ export const inputStyles = tv({
   variants: {
     size: {
       sm: "h-6 px-2 text-xs",
-      md: "h-8 px-3 text-xs",
+      md: "h-7 px-2 text-xs",
+      lg: "h-8 px-3 text-xs",
     },
     invalid: {
       true: 'data-[invalid="true"]:ring-red-500 data-[invalid="true"]:border-red-500 data-[invalid="true"]:focus:ring-red-100 data-[invalid="true"]:placeholder-error',
@@ -23,7 +24,7 @@ export const inputStyles = tv({
   },
   defaultVariants: {
     variant: "default",
-    size: "md",
+    size: "lg",
   },
 });
 

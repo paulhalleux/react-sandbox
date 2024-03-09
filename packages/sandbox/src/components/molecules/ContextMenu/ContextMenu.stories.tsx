@@ -8,7 +8,9 @@ const meta: Meta = {
   title: "Molecules/ContextMenu",
   tags: ["autodocs"],
   component: ContextMenu,
-  argTypes: {},
+  argTypes: {
+    children: { control: "disabled" },
+  },
 };
 
 export default meta;

@@ -67,7 +67,7 @@ export function ContextMenuItem({
       onClick(event);
     }
 
-    if (!event.defaultPrevented && (context?.closeOnSelect || closeOnSelect)) {
+    if (!event.defaultPrevented && context?.closeOnSelect && closeOnSelect) {
       context?.close();
     }
   };
@@ -153,6 +153,7 @@ export function ContextMenuSubmenu({
 
   return (
     <ContextMenu.Popover
+      triggerClassName="w-full"
       placement="right-start"
       close={context?.close}
       trigger={
@@ -186,7 +187,7 @@ export function ContextMenuSearch({
       variant="ghost"
       autoFocus
       className="w-full border-b border-t rounded-none rounded-br-none !ring-0 relative"
-      size="sm"
+      size="md"
       {...props}
     />
   );
@@ -222,6 +223,7 @@ export function ContextMenuFooter({
 type ContextMenuPopoverProps = React.PropsWithChildren<{
   trigger: React.ReactNode;
   placement?: Placement;
+  triggerClassName?: string;
 }> &
   ContextMenuProps;
 
@@ -231,13 +233,16 @@ export function ContextMenuPopover({
   placement = "bottom-start",
   close: _close,
   closeOnSelect,
+  triggerClassName,
+  className,
 }: ContextMenuPopoverProps) {
   return (
     <Popover triggerType="click" placement={placement}>
-      <Popover.Trigger className="w-full">{trigger}</Popover.Trigger>
+      <Popover.Trigger className={triggerClassName}>{trigger}</Popover.Trigger>
       <Popover.Content>
         {({ close }) => (
           <ContextMenu
+            className={className}
             close={() => {
               close();
               _close?.();

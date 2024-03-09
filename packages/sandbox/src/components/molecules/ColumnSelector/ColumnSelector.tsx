@@ -1,8 +1,7 @@
 import React from "react";
-import { Reorder, useDragControls } from "framer-motion";
-import { GripVertical } from "lucide-react";
+import { AnimatePresence, Reorder, useDragControls } from "framer-motion";
 
-import { Button, Checkbox, Text } from "@/components/atoms";
+import { Button, Checkbox, DragHandle, Text } from "@/components/atoms";
 import { ContextMenu } from "@/components/molecules";
 
 type BaseColumn = {
@@ -16,6 +15,7 @@ type ColumnSelectorProps<TColumn extends BaseColumn> = {
   active: string[];
   onColumnsActivate: (active: string[]) => void;
   onReset?: () => void;
+  trigger?: React.ReactNode;
 };
 
 export function ColumnSelector<TColumn extends BaseColumn>({
@@ -23,25 +23,36 @@ export function ColumnSelector<TColumn extends BaseColumn>({
   onColumnsReorder,
   active,
   onColumnsActivate,
-  onReset: _onReset,
+  onReset,
+  trigger,
 }: ColumnSelectorProps<TColumn>) {
-  const onReset = () => {
-    onColumnsActivate([]);
-    _onReset?.();
-  };
+  const [search, setSearch] = React.useState("");
 
   const onSelectAll = () => {
     onColumnsActivate(columns.map((column) => column.id));
   };
 
+  const filteredColumns = columns.filter((column) =>
+    column.label.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <div>
-      <ContextMenu className="w-48">
-        <ContextMenu.Title>Columns</ContextMenu.Title>
+    <ContextMenu.Popover
+      trigger={trigger}
+      className="w-48"
+      closeOnSelect={false}
+    >
+      <ContextMenu.Search
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <ContextMenu.Title>Columns</ContextMenu.Title>
+      <AnimatePresence mode="wait">
         <Reorder.Group onReorder={onColumnsReorder} values={columns}>
-          {columns.map((column) => (
+          {filteredColumns.map((column) => (
             <ColumnSelectorItem
               key={column.id}
+              disableReorder={search.length > 0}
               column={column}
               active={active.includes(column.id)}
               setActive={(isActive) =>
@@ -54,16 +65,16 @@ export function ColumnSelector<TColumn extends BaseColumn>({
             />
           ))}
         </Reorder.Group>
-        <ContextMenu.Footer>
-          <Button size="sm" onClick={onSelectAll}>
-            Select All
-          </Button>
-          <Button size="sm" onClick={onReset}>
-            Reset
-          </Button>
-        </ContextMenu.Footer>
-      </ContextMenu>
-    </div>
+      </AnimatePresence>
+      <ContextMenu.Footer>
+        <Button size="sm" onClick={onSelectAll}>
+          Select All
+        </Button>
+        <Button size="sm" onClick={onReset}>
+          Reset
+        </Button>
+      </ContextMenu.Footer>
+    </ContextMenu.Popover>
   );
 }
 
@@ -71,21 +82,16 @@ type ColumnSelectorItemProps = {
   column: { id: string; label: string };
   active: boolean;
   setActive: (active: boolean) => void;
+  disableReorder?: boolean;
 };
 
 function ColumnSelectorItem({
   column,
   active,
   setActive,
+  disableReorder,
 }: ColumnSelectorItemProps) {
   const dragControls = useDragControls();
-
-  const onPointerDown = (e: React.PointerEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    dragControls.start(e);
-  };
-
   return (
     <Reorder.Item
       value={column}
@@ -94,17 +100,18 @@ function ColumnSelectorItem({
     >
       <ContextMenu.Item
         asChild
+        closeOnSelect={false}
         className="!bg-transparent"
         addonLeft={
-          <GripVertical
-            onPointerDown={onPointerDown}
-            className="cursor-grab"
-            size={14}
-          />
+          <DragHandle dragControls={dragControls} disabled={disableReorder} />
         }
       >
         <Checkbox
-          label={<Text size="xs">{column.label}</Text>}
+          label={
+            <Text ellipsis size="xs">
+              {column.label}
+            </Text>
+          }
           checked={active}
           onChange={(event) => {
             setActive(event.target.checked);
