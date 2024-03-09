@@ -3,7 +3,6 @@ import { tv, VariantProps } from "tailwind-variants";
 
 export const inputStyles = tv({
   base: clsx(
-    "bg-white text-black border",
     "rounded-sm focus:outline-none font-medium",
     "focus:ring-2 focus:ring-offset-0 focus:ring-gray-100 w-full",
     "placeholder-shown:font-normal",
@@ -17,9 +16,13 @@ export const inputStyles = tv({
     invalid: {
       true: 'data-[invalid="true"]:ring-red-500 data-[invalid="true"]:border-red-500 data-[invalid="true"]:focus:ring-red-100 data-[invalid="true"]:placeholder-error',
     },
+    variant: {
+      default: "bg-white border",
+      ghost: "bg-transparent",
+    },
   },
   defaultVariants: {
-    status: "default",
+    variant: "default",
     size: "md",
   },
 });

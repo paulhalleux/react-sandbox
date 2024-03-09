@@ -4,7 +4,11 @@ import { tv, VariantProps } from "tailwind-variants";
 import { inputStyles } from "../Input/Input.styles.tsx";
 
 export const selectStyles = tv({
-  base: clsx(inputStyles.base, "appearance-none"),
+  base: clsx(
+    inputStyles.base,
+    inputStyles.variants.variant.default,
+    "appearance-none"
+  ),
   variants: {
     size: inputStyles.variants.size,
   },

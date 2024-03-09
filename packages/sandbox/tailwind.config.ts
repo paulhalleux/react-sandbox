@@ -14,6 +14,9 @@ const config: Config = {
     {
       pattern: /grid-cols-\d/,
     },
+    {
+      pattern: /text-\w+-\d{3}/,
+    },
   ],
   theme: {
     fontFamily: {

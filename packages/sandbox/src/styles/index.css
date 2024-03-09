@@ -9,3 +9,7 @@
     color: theme('colors.red.500');
   }
 }
+
+html, :host {
+  line-height: unset !important;
+}

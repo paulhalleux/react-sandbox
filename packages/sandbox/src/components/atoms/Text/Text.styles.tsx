@@ -33,6 +33,9 @@ export const textStyles = tv({
       warning: "text-warning",
       info: "text-info",
     },
+    ellipsis: {
+      true: "whitespace-nowrap overflow-hidden overflow-ellipsis",
+    },
   },
   defaultVariants: {
     size: "md",
@@ -41,6 +44,7 @@ export const textStyles = tv({
     italic: false,
     strikethrough: false,
     color: "default",
+    ellipsis: false,
   },
 });
 

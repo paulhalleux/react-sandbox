@@ -16,6 +16,7 @@ import {
   useRole,
 } from "@floating-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
+import { omit } from "lodash";
 
 // see https://codesandbox.io/p/sandbox/xenodochial-grass-js3bo9?file=%2Fsrc%2FTooltip.tsx%3A1%2C1-159%2C4
 
@@ -27,16 +28,20 @@ type PopoverOptions = {
   onOpenChange?: (open: boolean) => void;
   triggerType?: PopoverTriggerType;
   triggerOnFocus?: boolean;
+  closeOnScroll?: boolean;
+  closeOnClickInside?: boolean;
 };
 
-export function usePopover({
-  initialOpen = false,
-  placement = "top",
-  open: controlledOpen,
-  onOpenChange: setControlledOpen,
-  triggerType = "click",
-  triggerOnFocus = false,
-}: PopoverOptions = {}) {
+export function usePopover(options: PopoverOptions = {}) {
+  const {
+    initialOpen = false,
+    placement = "top",
+    open: controlledOpen,
+    onOpenChange: setControlledOpen,
+    triggerType = "click",
+    triggerOnFocus = false,
+    closeOnScroll = true,
+  } = options;
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(initialOpen);
 
   const open = controlledOpen ?? uncontrolledOpen;
@@ -73,7 +78,11 @@ export function usePopover({
     enabled: controlledOpen == null && triggerOnFocus,
   });
 
-  const dismiss = useDismiss(context);
+  const dismiss = useDismiss(context, {
+    ancestorScroll: closeOnScroll,
+    bubbles: false,
+  });
+
   const role = useRole(context, { role: "tooltip" });
 
   const interactions = useInteractions([click, hover, focus, dismiss, role]);
@@ -82,6 +91,7 @@ export function usePopover({
     () => ({
       open,
       setOpen,
+      options,
       ...interactions,
       ...data,
     }),
@@ -157,7 +167,11 @@ const PopoverTrigger = React.forwardRef<HTMLElement, PopoverTriggerProps>(
 
 const PopoverContent = React.forwardRef<
   HTMLDivElement,
-  React.HTMLProps<HTMLDivElement>
+  Omit<React.HTMLProps<HTMLDivElement>, "children"> & {
+    children:
+      | React.ReactNode
+      | ((props: { close: () => void }) => React.ReactNode);
+  }
 >(function PopoverContent({ style, ...props }, propRef) {
   const context = usePopoverContext();
   const ref = useMergeRefs([context.refs.setFloating, propRef]);
@@ -177,9 +191,17 @@ const PopoverContent = React.forwardRef<
               ...context.floatingStyles,
               ...style,
             }}
-            {...context.getFloatingProps(props)}
+            {...context.getFloatingProps(omit(props, ["children"]))}
+            onMouseDown={(e) => {
+              e.stopPropagation();
+              if (context.options.closeOnClickInside) {
+                context.setOpen(false);
+              }
+            }}
           >
-            {props.children}
+            {typeof props.children === "function"
+              ? props.children({ close: () => context.setOpen(false) })
+              : props.children}
           </motion.div>
         )}
       </AnimatePresence>

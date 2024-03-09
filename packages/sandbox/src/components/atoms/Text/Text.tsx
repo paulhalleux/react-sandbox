@@ -19,6 +19,7 @@ export function Text<ElementType extends React.ElementType = "p">({
   italic,
   strikethrough,
   color,
+  ellipsis,
   ...props
 }: TextProps<ElementType>) {
   const Component = as || "p";
@@ -30,6 +31,7 @@ export function Text<ElementType extends React.ElementType = "p">({
     italic,
     strikethrough,
     color,
+    ellipsis,
     className,
   });
 
