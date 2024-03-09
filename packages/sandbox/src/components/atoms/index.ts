@@ -9,3 +9,4 @@ export * from "./FileInput";
 export * from "./Checkbox";
 export * from "./DragHandle";
 export * from "./Popover";
+export * from "./Avatar";

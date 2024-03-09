@@ -3,10 +3,16 @@ import type { Placement } from "@floating-ui/react";
 import { clsx } from "clsx";
 import { ChevronRight } from "lucide-react";
 
-import { Input, InputProps, Popover, Text } from "@/components/atoms";
+import {
+  Input,
+  InputProps,
+  Popover,
+  PopoverProps,
+  Text,
+} from "@/components/atoms";
 import { Card } from "@/components/containers";
 
-type ContextMenuProps = React.PropsWithChildren<{
+export type ContextMenuProps = React.PropsWithChildren<{
   close?: () => void;
   closeOnSelect?: boolean;
   className?: string;
@@ -47,6 +53,7 @@ type ContextMenuItemProps = React.PropsWithChildren<{
   addonLeft?: React.ReactNode | typeof EmptyAddon;
   closeOnSelect?: boolean;
   asChild?: boolean;
+  displayOnly?: boolean;
 }> &
   Omit<React.ComponentPropsWithoutRef<"button">, "onClick">;
 
@@ -56,14 +63,16 @@ export function ContextMenuItem({
   addonLeft,
   onClick,
   closeOnSelect = true,
+  displayOnly = false,
   asChild,
   className,
   ...props
 }: ContextMenuItemProps) {
   const context = React.useContext(ContextMenuContext);
+  const Component = displayOnly ? "div" : "button";
 
   const onItemClicked = (event: React.MouseEvent) => {
-    if (onClick) {
+    if (onClick && !displayOnly) {
       onClick(event);
     }
 
@@ -73,13 +82,16 @@ export function ContextMenuItem({
   };
 
   return (
-    <button
+    <Component
       className={clsx(
-        "w-full px-2 py-1.5 text-left hover:bg-gray-50 active:bg-gray-100 inline-flex items-center",
+        "w-full px-2 py-1.5 text-left inline-flex items-center",
+        {
+          "hover:bg-gray-50 active:bg-gray-100": !displayOnly,
+        },
         className
       )}
       onClick={onItemClicked}
-      {...props}
+      {...(props as any)}
     >
       {addonLeft && (
         <div className="mr-2 w-3">
@@ -98,7 +110,7 @@ export function ContextMenuItem({
           {addonRight === ContextMenu.EmptyAddon ? <></> : addonRight}
         </div>
       )}
-    </button>
+    </Component>
   );
 }
 
@@ -224,6 +236,7 @@ type ContextMenuPopoverProps = React.PropsWithChildren<{
   trigger: React.ReactNode;
   placement?: Placement;
   triggerClassName?: string;
+  triggerType?: PopoverProps["triggerType"];
 }> &
   ContextMenuProps;
 
@@ -234,10 +247,11 @@ export function ContextMenuPopover({
   close: _close,
   closeOnSelect,
   triggerClassName,
+  triggerType = "click",
   className,
 }: ContextMenuPopoverProps) {
   return (
-    <Popover triggerType="click" placement={placement}>
+    <Popover triggerType={triggerType} placement={placement}>
       <Popover.Trigger className={triggerClassName}>{trigger}</Popover.Trigger>
       <Popover.Content>
         {({ close }) => (

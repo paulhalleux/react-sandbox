@@ -4,12 +4,12 @@ import { AnimatePresence, Reorder, useDragControls } from "framer-motion";
 import { Button, Checkbox, DragHandle, Text } from "@/components/atoms";
 import { ContextMenu } from "@/components/molecules";
 
-type BaseColumn = {
+export type BaseColumn = {
   id: string;
   label: string;
 };
 
-type ColumnSelectorProps<TColumn extends BaseColumn> = {
+export type ColumnSelectorProps<TColumn extends BaseColumn> = {
   columns: TColumn[];
   onColumnsReorder: (columns: TColumn[]) => void;
   active: string[];
@@ -39,7 +39,7 @@ export function ColumnSelector<TColumn extends BaseColumn>({
   return (
     <ContextMenu.Popover
       trigger={trigger}
-      className="w-48"
+      className="w-56"
       closeOnSelect={false}
     >
       <ContextMenu.Search

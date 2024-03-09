@@ -1,1 +1,1 @@
-export { ContextMenu } from "./ContextMenu.tsx";
+export { ContextMenu, type ContextMenuProps } from "./ContextMenu.tsx";
