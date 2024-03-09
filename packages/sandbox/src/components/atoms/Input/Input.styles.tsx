@@ -3,7 +3,7 @@ import { tv, VariantProps } from "tailwind-variants";
 
 export const inputStyles = tv({
   base: clsx(
-    "bg-white text-black border border-gray-300",
+    "bg-white text-black border",
     "rounded-sm focus:outline-none font-medium",
     "focus:ring-2 focus:ring-offset-0 focus:ring-gray-100 w-full",
     "placeholder-shown:font-normal",

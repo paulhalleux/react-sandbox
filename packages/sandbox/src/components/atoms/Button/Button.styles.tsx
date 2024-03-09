@@ -10,7 +10,7 @@ export const buttonStyles = tv({
   ),
   variants: {
     status: {
-      default: "bg-white text-black border border-gray-300",
+      default: "bg-white text-black border",
     },
     size: {
       sm: "h-6 px-2 text-xs",

@@ -6,3 +6,5 @@ export * from "./Select";
 export * from "./Tooltip";
 export * from "./Switch";
 export * from "./FileInput";
+export * from "./Checkbox";
+export * from "./Popover";

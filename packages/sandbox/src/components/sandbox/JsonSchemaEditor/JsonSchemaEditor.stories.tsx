@@ -9,6 +9,15 @@ import { JsonSchema, ValidationResult } from "./types";
 import { ZodValidator } from "./validation";
 import { JsonSchemaEditor } from "./";
 
+/**
+ * First iteration of a JSON Schema Editor.
+ *
+ * This component is not finished and probably won't be.
+ * This is just a proof of concept to see if it's possible to create a JSON Schema Editor and find the limitations of a such component.
+ * It allowed to discover the way JSON Schema works and how to validate it.
+ *
+ * Another implementation of a JSON Schema Editor will be done in the future.
+ */
 const meta: Meta = {
   title: "Components/JsonSchemaEditor",
   tags: ["autodocs"],

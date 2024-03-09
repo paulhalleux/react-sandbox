@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 
-import { cardStyles } from "./Card.styles.ts";
+import { cardStyles } from "./Card.styles.tsx";
 import { Card } from "./Card.tsx";
 
 const meta: Meta = {

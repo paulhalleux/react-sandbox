@@ -1,25 +1,24 @@
 import React, { ComponentPropsWithoutRef } from "react";
 import { clsx } from "clsx";
 
-import { switchStyles, SwitchVariant } from "./Switch.styles.tsx";
+import { checkboxStyles, CheckboxVariant } from "./Checkbox.styles";
 
-export type SwitchProps = ComponentPropsWithoutRef<"input"> & {
+export type CheckboxProps = ComponentPropsWithoutRef<"input"> & {
   label?: React.ReactNode;
   containerClassName?: string;
-} & SwitchVariant;
+} & CheckboxVariant;
 
-export function Switch({
-  id = "switch",
-  name = "switch",
+export function Checkbox({
+  id = "checkbox",
+  name = "checkbox",
   className,
   disabled,
   checked,
   onChange,
   label,
-  size,
   ...props
-}: SwitchProps) {
-  const classes = switchStyles({ size });
+}: CheckboxProps) {
+  const classes = checkboxStyles();
   return (
     <label
       className={clsx(

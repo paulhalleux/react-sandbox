@@ -29,6 +29,9 @@ const config: Config = {
       none: "0",
     },
     extend: {
+      borderColor: (utils) => ({
+        DEFAULT: utils.theme("colors.gray.300"),
+      }),
       placeholderColor: (utils) => ({
         DEFAULT: utils.theme("colors.gray.400"),
       }),

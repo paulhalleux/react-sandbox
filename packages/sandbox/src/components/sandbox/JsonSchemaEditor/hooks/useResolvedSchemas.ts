@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { useJsonSchemaEditor } from "../JsonSchemaEditor.context";
 import { BaseJsonSchemaType, JsonSchema } from "../types";
@@ -23,30 +23,30 @@ export function useResolvedSchemas<T extends BaseJsonSchemaType>({
   const { references, requestReference } = useJsonSchemaEditor();
   const [requestedReferences, setRequestedReferences] = useState<string[]>([]);
 
-  const resolvedSchemas = schemas.map((schema) => {
-    if ("$ref" in schema && schema.$ref) {
-      const isLocalReference = schema.$ref.startsWith("#");
+  const resolvedSchemas = useMemo(() => {
+    return schemas.map((schema) => {
+      if ("$ref" in schema && schema.$ref) {
+        const isLocalReference = schema.$ref.startsWith("#");
 
-      if (isLocalReference) {
-        return definition.definitions?.[
-          schema.$ref.replace("#/definitions/", "")
-        ];
+        if (isLocalReference) {
+          return definition.definitions?.[
+            schema.$ref.replace("#/definitions/", "")
+          ];
+        }
+
+        const reference = references[schema.$ref];
+        if (!reference && !requestedReferences.includes(schema.$ref)) {
+          setRequestedReferences([...requestedReferences, schema.$ref]);
+          requestReference(schema.$ref);
+        }
+        return references[schema.$ref];
       }
 
-      const reference = references[schema.$ref];
-      if (!reference && !requestedReferences.includes(schema.$ref)) {
-        setRequestedReferences([...requestedReferences, schema.$ref]);
-        requestReference(schema.$ref);
-      }
-      return references[schema.$ref];
-    }
-
-    return schema;
-  });
+      return schema;
+    });
+  }, [definition, references, requestedReferences, requestReference, schemas]);
 
   return {
-    schemas: (resolvedSchemas.filter(Boolean) as JsonSchema[]).filter(
-      (schema) => "type" in schema && schema.type === "object"
-    ),
+    schemas: resolvedSchemas.filter(Boolean) as JsonSchema[],
   };
 }

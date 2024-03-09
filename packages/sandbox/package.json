@@ -23,9 +23,7 @@
     "build:tailwind": "tailwindcss build src/styles/index.css -o dist/style.css",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "publish:storybook": "yarn build && firebase deploy --only hosting:phal-sandbox",
-    "test": "jest",
-    "test:coverage": "jest --coverage"
+    "publish:storybook": "yarn build && firebase deploy --only hosting:phal-sandbox"
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.9",
@@ -48,9 +46,7 @@
     "@storybook/react": "^7.6.17",
     "@storybook/react-vite": "^7.6.17",
     "@storybook/test": "^7.6.17",
-    "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
-    "@types/jest": "^29.5.12",
     "@types/node": "^20.11.20",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
@@ -59,15 +55,11 @@
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.17",
     "clsx": "^2.1.0",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.35",
     "sass": "^1.71.1",
     "storybook": "^7.6.17",
     "tailwind-variants": "^0.2.0",
     "tailwindcss": "^3.4.1",
-    "ts-jest": "^29.1.2",
-    "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.1.4",
     "vite-plugin-dts": "^3.7.3"

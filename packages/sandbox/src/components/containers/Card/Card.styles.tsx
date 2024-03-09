@@ -7,6 +7,10 @@ export const cardStyles = tv({
       default: "bg-white",
       secondary: "bg-gray-50",
     },
+    elevation: {
+      sm: "shadow-sm",
+      md: "shadow-md",
+    },
   },
   defaultVariants: {
     type: "default",
