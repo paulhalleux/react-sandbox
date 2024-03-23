@@ -1,9 +1,9 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { buttonStyles } from "./Button.styles.tsx";
 import { Button } from "./Button.tsx";
 
-const meta: Meta = {
+const meta: Meta<typeof Button> = {
   title: "Atoms/Button",
   tags: ["autodocs"],
   component: Button,
@@ -21,7 +21,8 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default = {
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {
   args: {
     children: "Button",
     status: "default",

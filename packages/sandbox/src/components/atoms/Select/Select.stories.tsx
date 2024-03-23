@@ -1,15 +1,15 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { selectStyles } from "./Select.styles.tsx";
 import { Select } from "./Select.tsx";
 
-const meta: Meta = {
+const meta: Meta<typeof Select> = {
   title: "Atoms/Select",
   tags: ["autodocs"],
   component: Select,
   argTypes: {
     children: {
-      control: { disable: true },
+      control: { type: "disabled" },
     },
     size: {
       control: { type: "select" },
@@ -20,7 +20,8 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default = {
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {
   args: {
     size: "md",
     children: (

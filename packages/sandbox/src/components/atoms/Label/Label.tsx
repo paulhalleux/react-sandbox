@@ -1,24 +1,26 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { HelpCircle } from "lucide-react";
 
 import { Text, Tooltip } from "..";
 
-type LabelProps = React.PropsWithChildren<{
+type LabelProps = {
   required?: boolean;
   help?: React.ReactNode;
   addon?: React.ReactNode;
   htmlFor?: string;
   requiredDisplay?: "optional" | "required";
-}>;
+} & PropsWithChildren;
 
-export function Label({
-  children,
-  required,
-  requiredDisplay = "required",
-  htmlFor,
-  help,
-  addon,
-}: LabelProps) {
+export function Label(props: LabelProps) {
+  const {
+    required,
+    help,
+    addon,
+    children,
+    htmlFor,
+    requiredDisplay = "required",
+  } = props;
+
   return (
     <Text size="xs" as="label" htmlFor={htmlFor} className="flex items-center">
       {children}

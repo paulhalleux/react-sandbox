@@ -3,13 +3,13 @@ import { tv, VariantProps } from "tailwind-variants";
 
 export const switchStyles = tv({
   base: clsx(
-    "relative border rounded-full peer bg-gray-50",
-    "after:border after:rounded-full after:absolute after:block after:bg-white after:top-[50%] after:left-[2.5px] after:transform after:-translate-y-1/2 after:w-[calc(100%_-_2.5px)] after:h-[calc(100%_-_2px)]",
+    "relative border rounded-full peer bg-contrast",
+    "after:border after:rounded-full after:absolute after:block after:bg after:top-[50%] after:left-[2.5px] after:transform after:-translate-y-1/2 after:w-[calc(100%_-_2.5px)] after:h-[calc(100%_-_2px)]",
     "peer-checked:after:start-[calc(100%_-_3px)] peer-checked:after:-translate-x-full",
     "after:transition-all after:duration-200 after:ease-in-out",
-    "peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-gray-100 peer-focus:ring-offset-0",
-    "peer-checked:bg-blue-500/30 peer-checked:border-blue-500 transition-colors peer-checked:peer-focus:ring-blue-100",
-    "peer-checked:after:border-blue-500"
+    "peer-focus:outline-none peer-focus:ring peer-checked:peer-focus:ring-primary/10",
+    "peer-checked:bg-primary/5 peer-checked:border-primary transition-colors",
+    "peer-checked:after:border-primary"
   ),
   variants: {
     size: {

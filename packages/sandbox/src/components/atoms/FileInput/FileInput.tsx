@@ -7,7 +7,7 @@ import { fileInputStyles, FileInputVariant } from "./FileInput.styles";
 
 export type FileInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  "type" | "onChange"
+  "type" | "onChange" | keyof FileInputVariant
 > & {
   onChange?: (
     files: FileList | null,
@@ -17,7 +17,7 @@ export type FileInputProps = Omit<
 
 export function FileInput({
   className,
-  size,
+  size = "md",
   onChange,
   ...props
 }: FileInputProps) {

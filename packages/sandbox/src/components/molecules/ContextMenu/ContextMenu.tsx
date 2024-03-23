@@ -87,7 +87,7 @@ export function ContextMenuItem({
         "w-full px-2 py-1.5 text-left inline-flex items-center",
         "focus:outline-none focus:bg-gray-50",
         {
-          "hover:bg-gray-50 active:bg-gray-100": !displayOnly,
+          "hover:bg-contrast active:bg-contrast-secondary": !displayOnly,
         },
         className
       )}
@@ -126,7 +126,7 @@ type ContextMenuGroupProps = React.PropsWithChildren<{
 export function ContextMenuGroup({ label, children }: ContextMenuGroupProps) {
   return (
     <div className="contents">
-      <header className="px-2 py-1 text-gray-600 border-b border-t bg-gray-100 sticky -top-[1px] z-10">
+      <header className="px-2 py-1 text-gray-600 border-b border-t bg-contrast sticky -top-[1px] z-10">
         <Text size="xs" weight="medium">
           {label}
         </Text>
@@ -186,11 +186,14 @@ export function ContextMenuSubmenu({
 
 type ContextMenuSearchProps = Omit<
   InputProps,
-  "className" | "variant" | "size"
->;
+  "className" | "variant" | "size" | "onChange"
+> & {
+  onChange?: (value: string) => void;
+};
 
 export function ContextMenuSearch({
   placeholder = "Search",
+  onChange,
   ...props
 }: ContextMenuSearchProps) {
   return (
@@ -199,8 +202,9 @@ export function ContextMenuSearch({
       placeholder={placeholder}
       variant="ghost"
       autoFocus
-      className="w-full border-b border-t rounded-none rounded-br-none !ring-0 relative"
+      className="w-full border-b border-t rounded-none rounded-br-none !ring-none relative"
       size="md"
+      onChange={(event) => onChange?.(event.target.value)}
       {...props}
     />
   );
@@ -221,7 +225,7 @@ export function ContextMenuFooter({
   return (
     <footer
       className={clsx(
-        "bg-white px-2 py-1.5 border-t border-gray-200 sticky z-30 bottom-0 flex items-center gap-1 mt-1.5",
+        "bg px-2 py-1.5 border-t border-gray-200 sticky z-30 bottom-0 flex items-center gap-1 mt-1.5",
         className
       )}
       {...props}

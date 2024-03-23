@@ -1,14 +1,20 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { Label } from "./Label.tsx";
 
-const meta: Meta = {
+const meta: Meta<typeof Label> = {
   title: "Atoms/Label",
   tags: ["autodocs"],
   component: Label,
   argTypes: {
     required: {
       control: { type: "boolean" },
+    },
+    requiredDisplay: {
+      control: {
+        type: "select",
+        options: ["optional", "required"],
+      },
     },
     help: {
       control: { type: "text" },
@@ -17,14 +23,15 @@ const meta: Meta = {
       control: { type: "text" },
     },
     htmlFor: {
-      control: { disable: true },
+      control: "disabled",
     },
   },
 };
 
 export default meta;
 
-export const Default = {
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {
   args: {
     children: "Hello, world!",
     required: false,

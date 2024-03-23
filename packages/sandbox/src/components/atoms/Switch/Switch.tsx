@@ -3,7 +3,10 @@ import { clsx } from "clsx";
 
 import { switchStyles, SwitchVariant } from "./Switch.styles.tsx";
 
-export type SwitchProps = ComponentPropsWithoutRef<"input"> & {
+export type SwitchProps = Omit<
+  ComponentPropsWithoutRef<"input">,
+  keyof SwitchVariant
+> & {
   label?: React.ReactNode;
   containerClassName?: string;
 } & SwitchVariant;

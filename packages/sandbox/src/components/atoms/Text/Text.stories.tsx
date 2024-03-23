@@ -1,9 +1,9 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { textStyles } from "./Text.styles.tsx";
 import { Text } from "./Text.tsx";
 
-const meta: Meta = {
+const meta: Meta<typeof Text> = {
   title: "Atoms/Text",
   tags: ["autodocs"],
   component: Text,
@@ -37,7 +37,8 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default = {
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {
   args: {
     children: "Hello, world!",
     size: "md",

@@ -14,7 +14,7 @@ export const selectStyles = tv({
   },
   slots: {
     chevron:
-      "absolute w-1.5 h-1.5 right-3 top-[50%] translate-y-[-50%] rotate-45 border-b border-r border-gray-600",
+      "absolute w-1.5 h-1.5 right-3 top-[50%] translate-y-[-50%] rotate-45 border-b border-r border-dark",
   },
   defaultVariants: inputStyles.defaultVariants,
 });

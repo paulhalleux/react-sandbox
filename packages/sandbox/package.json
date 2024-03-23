@@ -7,16 +7,20 @@
     "dist"
   ],
   "main": "./dist/index.umd.cjs",
+  "types": "./dist/index.lib.d.ts",
   "module": "./dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.umd.cjs"
+      "require": "./dist/index.umd.cjs",
+      "types": "./dist/index.lib.d.ts"
     },
-    "./style.css": "./dist/style.css"
+    "./dist/style.css": "./dist/style.css",
+    "./tailwind.config": "./tailwind.config.ts",
+    "./postcss.config": "./postcss.config.js"
   },
   "scripts": {
-    "dev": "storybook dev -p 6006 -s public",
+    "dev": "storybook dev -p 6006",
     "build": "yarn build:lib && yarn build:storybook && yarn build:tailwind",
     "build:lib": "tsc && vite build",
     "build:storybook": "storybook build",
@@ -37,15 +41,15 @@
   },
   "devDependencies": {
     "@paulhalleux/eslint-config-sandbox": "^1.0.0",
-    "@storybook/addon-essentials": "^7.6.17",
-    "@storybook/addon-interactions": "^7.6.17",
-    "@storybook/addon-links": "^7.6.17",
-    "@storybook/addon-onboarding": "1.0.11",
+    "@storybook/addon-essentials": "^8.0.0",
+    "@storybook/addon-interactions": "^8.0.0",
+    "@storybook/addon-links": "^8.0.0",
+    "@storybook/addon-onboarding": "^8.0.0",
     "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/blocks": "^7.6.17",
-    "@storybook/react": "^7.6.17",
-    "@storybook/react-vite": "^7.6.17",
-    "@storybook/test": "^7.6.17",
+    "@storybook/blocks": "^8.0.0",
+    "@storybook/react": "^8.0.0",
+    "@storybook/react-vite": "^8.0.0",
+    "@storybook/test": "^8.0.0",
     "@testing-library/react": "^14.2.1",
     "@types/node": "^20.11.20",
     "@types/react": "^18.2.56",
@@ -57,7 +61,7 @@
     "clsx": "^2.1.0",
     "postcss": "^8.4.35",
     "sass": "^1.71.1",
-    "storybook": "^7.6.17",
+    "storybook": "^8.0.0",
     "tailwind-variants": "^0.2.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",

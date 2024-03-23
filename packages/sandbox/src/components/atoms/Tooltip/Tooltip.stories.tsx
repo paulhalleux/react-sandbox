@@ -4,7 +4,7 @@ import { Button } from "@/components/atoms";
 
 import { Tooltip } from "./Tooltip.tsx";
 
-const meta: Meta = {
+const meta: Meta<typeof Tooltip> = {
   title: "Atoms/Tooltip",
   tags: ["autodocs"],
   component: Tooltip,
@@ -18,7 +18,8 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default: StoryObj<typeof meta> = {
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {
   args: {
     placement: "top",
   },

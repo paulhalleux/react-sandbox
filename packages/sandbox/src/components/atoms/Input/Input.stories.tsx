@@ -1,9 +1,9 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { inputStyles } from "./Input.styles.tsx";
 import { Input } from "./Input.tsx";
 
-const meta: Meta = {
+const meta: Meta<typeof Input> = {
   title: "Atoms/Input",
   tags: ["autodocs"],
   component: Input,
@@ -17,7 +17,8 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default = {
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {
   args: {
     size: "md",
   },

@@ -5,7 +5,7 @@ import { Card } from "@/components/containers";
 
 import { Popover } from "./Popover.tsx";
 
-const meta: Meta = {
+const meta: Meta<typeof Popover> = {
   title: "Atoms/Popover",
   tags: ["autodocs"],
   component: Popover,
@@ -22,7 +22,6 @@ const meta: Meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
-
 export const Default: Story = {
   args: {
     placement: "bottom-start",

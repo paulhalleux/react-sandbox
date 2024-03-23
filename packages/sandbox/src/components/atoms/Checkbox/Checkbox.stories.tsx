@@ -1,23 +1,25 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { Label } from "@/components/atoms";
 
 import { Checkbox } from "./Checkbox.tsx";
 
-const meta: Meta = {
+const meta: Meta<typeof Checkbox> = {
   title: "Atoms/Checkbox",
   tags: ["autodocs"],
   component: Checkbox,
   argTypes: {
-    label: { control: { disable: true } },
-    id: { control: { disable: true } },
-    name: { control: { disable: true } },
+    label: { control: "disabled" },
+    id: { control: "disabled" },
+    name: { control: "disabled" },
+    containerClassName: { control: "disabled" },
   },
 };
 
 export default meta;
 
-export const Default = {
+type Story = StoryObj<typeof Checkbox>;
+export const Default: Story = {
   args: {
     name: "switch",
     id: "switch",

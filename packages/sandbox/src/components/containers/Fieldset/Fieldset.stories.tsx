@@ -1,17 +1,17 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { Field } from "@/components/molecules";
 
 import { Fieldset } from "./Fieldset.tsx";
 
-const meta: Meta = {
+const meta: Meta<typeof Fieldset> = {
   title: "Containers/Fieldset",
   tags: ["autodocs"],
   component: Fieldset,
   argTypes: {
     children: {
       control: {
-        disable: true,
+        type: "disabled",
       },
     },
   },
@@ -19,8 +19,12 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default = {
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {
   args: {
+    legend: "Legend",
+    description: "Description",
+    className: "gap-2.5",
     children: (
       <>
         <Field.Input
@@ -35,8 +39,5 @@ export const Default = {
         />
       </>
     ),
-    legend: "Legend",
-    description: "Description",
-    className: "gap-2.5",
   },
 };

@@ -130,7 +130,6 @@ export const Custom: StoryObj = {
       <div>
         <FileInput onChange={onFileChange} />
         <hr className="my-3" />
-
         <JsonSchemaEditor
           value={value}
           onChange={setValue}

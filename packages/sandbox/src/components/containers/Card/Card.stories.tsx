@@ -1,35 +1,27 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { cardStyles } from "./Card.styles.tsx";
 import { Card } from "./Card.tsx";
 
-const meta: Meta = {
+const meta: Meta<typeof Card> = {
   title: "Containers/Card",
   tags: ["autodocs"],
   component: Card,
   argTypes: {
-    children: {
-      control: {
-        disable: true,
-      },
-    },
-    as: {
-      control: {
-        disable: true,
-      },
-    },
     type: {
-      control: {
-        type: "select",
-        options: Object.keys(cardStyles.variants.type),
-      },
+      control: "select",
+      options: Object.keys(cardStyles.variants.type),
+    },
+    children: {
+      control: "disabled",
     },
   },
 };
 
 export default meta;
 
-export const Default = {
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {
   args: {
     type: "default",
     children: <>lorem ipsum</>,

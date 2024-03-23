@@ -4,8 +4,8 @@ export const cardStyles = tv({
   base: "rounded border",
   variants: {
     type: {
-      default: "bg-white",
-      secondary: "bg-gray-50",
+      default: "bg",
+      secondary: "bg-contrast",
     },
     elevation: {
       sm: "shadow-sm",

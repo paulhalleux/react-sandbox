@@ -6,7 +6,7 @@ type ButtonProps = React.ComponentPropsWithoutRef<"button"> & ButtonVariant;
 
 export function Button({
   children,
-  size,
+  size = "md",
   status,
   className,
   icon,

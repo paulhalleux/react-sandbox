@@ -42,10 +42,7 @@ export function ColumnSelector<TColumn extends BaseColumn>({
       className="w-56"
       closeOnSelect={false}
     >
-      <ContextMenu.Search
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <ContextMenu.Search value={search} onChange={setSearch} />
       <ContextMenu.Title>Columns</ContextMenu.Title>
       <AnimatePresence mode="wait">
         <Reorder.Group onReorder={onColumnsReorder} values={columns}>

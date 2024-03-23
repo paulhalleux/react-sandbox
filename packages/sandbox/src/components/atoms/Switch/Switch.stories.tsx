@@ -1,11 +1,11 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { Label } from "@/components/atoms";
 
 import { switchStyles } from "./Switch.styles.tsx";
 import { Switch } from "./Switch.tsx";
 
-const meta: Meta = {
+const meta: Meta<typeof Switch> = {
   title: "Atoms/Switch",
   tags: ["autodocs"],
   component: Switch,
@@ -14,19 +14,21 @@ const meta: Meta = {
       control: { type: "select" },
       options: Object.keys(switchStyles.variants.size),
     },
-    label: { control: { disable: true } },
-    id: { control: { disable: true } },
-    name: { control: { disable: true } },
+    label: { control: "disabled" },
+    id: { control: "disabled" },
+    name: { control: "disabled" },
+    containerClassName: { control: "disabled" },
   },
 };
 
 export default meta;
 
-export const Default = {
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {
   args: {
-    name: "switch",
-    id: "switch",
     size: "sm",
     label: <Label htmlFor="switch">Switch label</Label>,
+    name: "switch",
+    id: "switch",
   },
 };

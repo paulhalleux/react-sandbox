@@ -112,7 +112,7 @@ export const usePopoverContext = () => {
   return context;
 };
 
-export type PopoverProps = React.PropsWithChildren<PopoverOptions>;
+export type PopoverProps = React.PropsWithChildren & PopoverOptions;
 export function Popover({ children, ...options }: PopoverProps) {
   // This can accept any props as options, e.g. `placement`,
   // or other positioning options.

@@ -1,13 +1,5 @@
 import { Config } from "tailwindcss/types";
 
-const colorShades = {
-  gray: 500,
-  success: 600,
-  danger: 600,
-  warning: 600,
-  info: 600,
-};
-
 const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],
   safelist: [
@@ -19,35 +11,61 @@ const config: Config = {
     },
   ],
   theme: {
-    fontFamily: {
-      sans: ["Inter", "sans-serif"],
+    textColor: {
+      DEFAULT: "#000000",
+      white: "#ffffff",
+      secondary: "#6b6c7e",
+      danger: "#f44336",
+      warning: "#ff9800",
+      success: "#4caf50",
+      info: "#2196f3",
+      primary: "#1800ac",
+    },
+    borderColor: {
+      DEFAULT: "#dcdee1",
+      white: "#ffffff",
+      dark: "#aaaaaf",
+      danger: "#f44336",
+      warning: "#ff9800",
+      success: "#4caf50",
+      info: "#2196f3",
+      primary: "#1800ac",
+    },
+    backgroundColor: {
+      DEFAULT: "#ffffff",
+      black: "#000000",
+      contrast: "#fafafc",
+      ["contrast-secondary"]: "#f2f2f5",
+      primary: "#1800ac",
     },
     borderRadius: {
-      DEFAULT: "5px",
-      default: "5px",
-      sm: "5px",
-      md: "7px",
-      lg: "8px",
+      DEFAULT: "4px",
+      sm: "4px",
       full: "9999px",
       none: "0",
     },
-    extend: {
-      borderColor: (utils) => ({
-        DEFAULT: utils.theme("colors.gray.300"),
-      }),
-      placeholderColor: (utils) => ({
-        DEFAULT: utils.theme("colors.gray.400"),
-      }),
-      textColor: (utils) => ({
-        DEFAULT: utils.theme("colors.gray.800"),
-        default: utils.theme("colors.gray.800"),
-        secondary: utils.theme(`colors.gray.${colorShades.gray}`),
-        danger: utils.theme(`colors.red.${colorShades.danger}`),
-        success: utils.theme(`colors.green.${colorShades.success}`),
-        warning: utils.theme(`colors.yellow.${colorShades.warning}`),
-        info: utils.theme(`colors.blue.${colorShades.info}`),
-      }),
+    ringColor: {
+      DEFAULT: "#000000",
+      white: "#ffffff",
+      danger: "#f44336",
+      primary: "#1800ac",
     },
+    ringOpacity: {
+      DEFAULT: "0.05",
+      white: "1",
+      primary: "0.1",
+    },
+    ringWidth: {
+      DEFAULT: "2px",
+      none: "0",
+    },
+    outline: {
+      DEFAULT: ["2px solid #4c9aff", "2px"],
+    },
+    fontFamily: {
+      sans: ["Inter", "sans-serif"],
+    },
+    extend: {},
   },
   plugins: [],
 };

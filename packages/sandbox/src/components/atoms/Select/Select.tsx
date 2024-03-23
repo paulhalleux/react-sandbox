@@ -3,7 +3,7 @@ import React from "react";
 import { selectStyles, SelectVariant } from "./Select.styles.tsx";
 
 export type SelectProps = React.PropsWithChildren &
-  React.ComponentPropsWithoutRef<"select"> &
+  Omit<React.ComponentPropsWithoutRef<"select">, keyof SelectVariant> &
   SelectVariant;
 
 export function Select({ children, size, className, ...rest }: SelectProps) {

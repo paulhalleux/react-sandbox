@@ -1,2 +1,2 @@
 import "./styles/index.css";
-export {};
+export * from "./components";
